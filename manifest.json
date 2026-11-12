@@ -1,0 +1,12 @@
+{
+  "id": "/gunafast/",
+  "name": "GUNAFAST - Business Management",
+  "short_name": "GUNAFAST",
+  "description": "Aplikasi manajemen bisnis untuk mengelola produk, stok, kasir, laporan, laba rugi, dan keuangan.",
+  "start_url": "/gunafast/",
+  "scope": "/gunafast/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#edf7f5",
+  "theme_color": "#b9e5ef"
+}
