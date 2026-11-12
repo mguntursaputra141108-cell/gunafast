@@ -1,0 +1,3536 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#090d1b">
+<title>GUNAFAST</title>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background: #090d1b;
+  color: #f4f5ff;
+  min-height: 100vh;
+}
+
+.app {
+  max-width: 1100px;
+  margin: auto;
+  padding: 22px 18px 100px;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.logo {
+  font-size: 25px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  background: linear-gradient(90deg,#a78bfa,#38bdf8);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.version {
+  font-size: 10px;
+  color: #929bb6;
+  margin-top: 5px;
+}
+
+.profile {
+  width: 40px;
+  height: 40px;
+  border-radius: 13px;
+  display: grid;
+  place-items: center;
+  background: #1b2140;
+  border: 1px solid #353b63;
+}
+
+.welcome {
+  margin-bottom: 23px;
+}
+
+.welcome p {
+  color: #929bb6;
+  font-size: 13px;
+  margin-bottom: 8px;
+}
+
+.welcome h1 {
+  font-size: 24px;
+}
+
+.welcome h1 span {
+  color: #a78bfa;
+}
+
+.section-title {
+  font-size: 15px;
+  margin: 25px 0 14px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  gap: 12px;
+}
+
+.card {
+  background: linear-gradient(145deg,#171e36,#101629);
+  border: 1px solid #252e4d;
+  padding: 17px;
+  border-radius: 17px;
+}
+
+.card p {
+  font-size: 12px;
+  color: #a1aac3;
+  margin-bottom: 13px;
+}
+
+.card h2 {
+  font-size: 21px;
+}
+
+.purple { color: #b49aff; }
+.blue { color: #55c7ff; }
+.green { color: #50e0ad; }
+.red { color: #ff758b; }
+
+.panel {
+  background: #11182c;
+  border: 1px solid #252e4d;
+  border-radius: 17px;
+  padding: 18px;
+  margin-top: 14px;
+}
+
+.panel p {
+  font-size: 12px;
+  color: #929bb6;
+  margin-top: 8px;
+}
+
+.quick-actions {
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  gap: 12px;
+}
+
+.action {
+  background: #171e36;
+  color: white;
+  border: 1px solid #303b5d;
+  padding: 16px 10px;
+  border-radius: 14px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.action:active {
+  background: #30245a;
+}
+
+nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(12,17,34,.96);
+  border-top: 1px solid #28304d;
+  display: flex;
+  justify-content: space-around;
+  padding: 12px 4px calc(12px + env(safe-area-inset-bottom));
+  z-index: 10;
+}
+
+nav button {
+  background: none;
+  border: none;
+  color: #8e98b5;
+  font-size: 10px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+nav button span {
+  font-size: 19px;
+}
+
+nav button.active {
+  color: #b49aff;
+}
+
+.page {
+  display: none;
+}
+
+.page.active {
+  display: block;
+}
+
+.empty {
+  text-align: center;
+  padding: 45px 15px;
+  color: #9da7c1;
+  background: #11182c;
+  border: 1px solid #252e4d;
+  border-radius: 17px;
+}
+
+.empty h3 {
+  color: white;
+  margin-bottom: 10px;
+}
+
+@media(min-width:650px) {
+  .grid {
+    grid-template-columns: repeat(4,1fr);
+  }
+  .quick-actions {
+    grid-template-columns: repeat(4,1fr);
+  }
+}
+
+/* GUNAFAST PRODUCT MODULE */
+
+.product-form {
+  display: grid;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.product-form input,
+.product-form select {
+  width: 100%;
+  padding: 14px;
+  border-radius: 12px;
+  border: 1px solid #303b5d;
+  background: #171e36;
+  color: white;
+  outline: none;
+  font-size: 14px;
+}
+
+.product-form input:focus,
+.product-form select:focus {
+  border-color: #a78bfa;
+}
+
+.primary-btn {
+  background: linear-gradient(90deg,#7654dc,#398cde);
+  border: none;
+  padding: 14px;
+  color: white;
+  border-radius: 12px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.secondary-btn {
+  background: #29324c;
+  border: none;
+  padding: 12px;
+  color: white;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.product-item {
+  background: #171e36;
+  border: 1px solid #303b5d;
+  padding: 15px;
+  border-radius: 14px;
+  margin-top: 12px;
+}
+
+.product-item h3 {
+  font-size: 15px;
+  margin-bottom: 9px;
+}
+
+.product-info {
+  color: #a1aac3;
+  font-size: 12px;
+  line-height: 1.9;
+}
+
+.product-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.product-actions button {
+  flex: 1;
+}
+
+.stock-warning {
+  color: #ffbd69;
+}
+
+#productList {
+  margin-top: 15px;
+}
+
+.product-count {
+  color: #929bb6;
+  font-size: 12px;
+  margin-top: 8px;
+}
+
+/* GUNAFAST CASHIER MODULE */
+
+.cashier-form {
+  display: grid;
+  gap: 12px;
+  margin-top: 15px;
+}
+
+.cashier-form input,
+.cashier-form select {
+  width: 100%;
+  padding: 14px;
+  border-radius: 12px;
+  border: 1px solid #303b5d;
+  background: #171e36;
+  color: white;
+  font-size: 14px;
+  outline: none;
+}
+
+.cart-item {
+  background: #171e36;
+  border: 1px solid #303b5d;
+  padding: 14px;
+  border-radius: 13px;
+  margin-top: 10px;
+}
+
+.cart-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.cart-controls button {
+  background: #293653;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 13px;
+}
+
+.cart-total {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 13px;
+  font-size: 13px;
+  color: #b9c2d8;
+}
+
+.checkout-total {
+  font-size: 24px;
+  font-weight: bold;
+  color: #50e0ad;
+  margin-top: 15px;
+}
+
+.receipt {
+  background: #171e36;
+  border: 1px dashed #65749b;
+  padding: 18px;
+  border-radius: 12px;
+  margin-top: 15px;
+  line-height: 1.8;
+  font-size: 13px;
+  overflow-wrap: anywhere;
+}
+
+.receipt button {
+  margin-top: 12px;
+}
+
+.sale-history-item {
+  background: #171e36;
+  border: 1px solid #303b5d;
+  border-radius: 13px;
+  padding: 14px;
+  margin-top: 10px;
+}
+
+.cashier-muted {
+  color: #929bb6;
+  font-size: 12px;
+}
+
+</style>
+</head>
+
+<body>
+<div class="app">
+
+<header>
+  <div>
+    <div class="logo">GUNAFAST.</div>
+    <div class="version">BUSINESS MANAGEMENT SYSTEM · V1.0</div>
+  </div>
+  <div class="profile">👤</div>
+</header>
+
+<!-- DASHBOARD -->
+<section class="page active" id="dashboard">
+  <div class="welcome">
+    <p>WEDNESDAY, 11 NOVEMBER 2026</p>
+    <h1>Welcome to <span>GUNAFAST</span></h1>
+    <p>Kelola bisnis dan keuanganmu dalam satu tempat.</p>
+  </div>
+
+  <h3 class="section-title">Ringkasan bisnis</h3>
+
+  <div class="grid">
+    <div class="card">
+      <p>Total penjualan</p>
+      <h2 class="blue">Rp0</h2>
+    </div>
+    <div class="card">
+      <p>Keuntungan</p>
+      <h2 class="green">Rp0</h2>
+    </div>
+    <div class="card">
+      <p>Modal usaha</p>
+      <h2 class="purple">Rp0</h2>
+    </div>
+    <div class="card">
+      <p>Total kerugian</p>
+      <h2 class="red">Rp0</h2>
+    </div>
+  </div>
+
+  <h3 class="section-title">Aktivitas cepat</h3>
+
+  <div class="quick-actions">
+    <button class="action" onclick="showPage('kasir')">🛒<br><br>Kasir</button>
+    <button class="action" onclick="showPage('produk')">📦<br><br>Tambah barang</button>
+    <button class="action" onclick="showPage('stok')">📊<br><br>Kelola stok</button>
+    <button class="action" onclick="showPage('keuangan')">💰<br><br>Keuangan</button>
+  </div>
+
+  <h3 class="section-title">Aktivitas terbaru</h3>
+  <div class="panel">
+    <strong>Belum ada transaksi</strong>
+    <p>Transaksi yang kamu lakukan nantinya akan muncul di sini.</p>
+  </div>
+</section>
+
+
+<!-- PRODUK -->
+<section class="page" id="produk">
+
+  <h2>Manajemen Produk</h2>
+  <p style="color:#929bb6;margin-top:8px;font-size:13px">
+    Kelola barang dan persediaan bisnismu.
+  </p>
+
+  <div class="grid" style="margin-top:18px">
+    <div class="card">
+      <p>Total jenis barang</p>
+      <h2 class="blue" id="totalProduk">0</h2>
+    </div>
+    <div class="card">
+      <p>Total stok barang</p>
+      <h2 class="green" id="totalStok">0</h2>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h3 id="formTitle">＋ Tambah Barang</h3>
+
+    <form class="product-form" id="productForm">
+
+      <input id="productName"
+        type="text"
+        placeholder="Nama barang"
+        required>
+
+      <input id="productCode"
+        type="text"
+        placeholder="Kode barang (contoh: BRG001)"
+        required>
+
+      <select id="productCategory" required>
+        <option value="">Pilih kategori</option>
+        <option value="Makanan">Makanan</option>
+        <option value="Minuman">Minuman</option>
+        <option value="Sembako">Sembako</option>
+        <option value="Fashion">Fashion</option>
+        <option value="Elektronik">Elektronik</option>
+        <option value="Lainnya">Lainnya</option>
+      </select>
+
+      <input id="buyPrice"
+        type="number"
+        min="0"
+        placeholder="Harga beli / modal (Rp)"
+        required>
+
+      <input id="sellPrice"
+        type="number"
+        min="0"
+        placeholder="Harga jual (Rp)"
+        required>
+
+      <input id="productStock"
+        type="number"
+        min="0"
+        step="1"
+        placeholder="Jumlah stok awal"
+        required>
+
+      <input id="minimumStock"
+        type="number"
+        min="0"
+        step="1"
+        placeholder="Batas minimum stok"
+        value="5"
+        required>
+
+      <button type="submit" class="primary-btn" id="saveProduct">
+        Simpan Barang
+      </button>
+
+      <button type="button"
+        class="secondary-btn"
+        id="cancelEdit"
+        onclick="cancelProductEdit()"
+        style="display:none">
+        Batal Edit
+      </button>
+
+    </form>
+  </div>
+
+  <h3 class="section-title">Daftar Barang</h3>
+  <p class="product-count" id="productCount">0 barang terdaftar</p>
+
+  <div id="productList"></div>
+
+</section>
+
+  </div>
+</section>
+
+
+<!-- KASIR -->
+<section class="page" id="kasir">
+
+  <h2>GUNAFAST POS</h2>
+  <p style="color:#929bb6;margin-top:8px">
+    Sistem transaksi penjualan.
+  </p>
+
+  <div class="panel">
+    <h3>＋ Tambahkan ke Keranjang</h3>
+
+    <form class="cashier-form" id="cartForm">
+
+      <select id="cartProduct" required>
+        <option value="">Pilih produk</option>
+      </select>
+
+      <input
+        id="cartQuantity"
+        type="number"
+        min="1"
+        step="1"
+        value="1"
+        placeholder="Jumlah barang"
+        required
+      >
+
+      <button type="submit" class="primary-btn">
+        Tambahkan Barang
+      </button>
+
+    </form>
+  </div>
+
+  <h3 class="section-title">Keranjang Belanja</h3>
+
+  <div id="cartList"></div>
+
+  <div class="panel">
+    <h3>Ringkasan Pembayaran</h3>
+
+    <div class="cart-total">
+      <span>Subtotal</span>
+      <strong id="cartSubtotal">Rp0</strong>
+    </div>
+
+    <div class="cart-total">
+      <span>Diskon (Rp)</span>
+      <strong id="cartDiscountLabel">Rp0</strong>
+    </div>
+
+    <input
+      id="cartDiscount"
+      type="number"
+      min="0"
+      step="1"
+      value="0"
+      placeholder="Masukkan diskon rupiah"
+      style="width:100%;padding:13px;margin-top:12px;border-radius:10px;background:#171e36;color:white;border:1px solid #303b5d"
+    >
+
+    <div class="checkout-total" id="cartGrandTotal">
+      Rp0
+    </div>
+
+    <p class="cashier-muted">Total yang harus dibayar</p>
+
+    <div class="cashier-form">
+
+      <input
+        id="cashReceived"
+        type="number"
+        min="0"
+        step="1"
+        placeholder="Uang diterima (Rp)"
+      >
+
+      <div class="cart-total">
+        <span>Kembalian</span>
+        <strong class="green" id="cashChange">Rp0</strong>
+      </div>
+
+      <button
+        type="button"
+        class="primary-btn"
+        id="checkoutButton"
+        onclick="checkoutSale()"
+      >
+        Selesaikan Transaksi
+      </button>
+
+    </div>
+  </div>
+
+  <h3 class="section-title">Riwayat Penjualan</h3>
+
+  <div id="salesHistory"></div>
+
+  <div id="receiptArea"></div>
+
+</section>
+
+
+
+<!-- STOK -->
+<section class="page" id="stok">
+
+  <h2>Manajemen Stok</h2>
+  <p style="color:#929bb6;margin-top:8px">
+    Pantau dan kendalikan persediaan barang.
+  </p>
+
+  <div class="grid" style="margin-top:18px">
+    <div class="card">
+      <p>Total stok</p>
+      <h2 class="blue" id="stockTotal">0</h2>
+    </div>
+    <div class="card">
+      <p>Stok menipis</p>
+      <h2 class="red" id="stockLow">0</h2>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h3>＋ Pergerakan Stok</h3>
+
+    <form class="product-form" id="stockForm">
+
+      <select id="stockProduct" required>
+        <option value="">Pilih barang</option>
+      </select>
+
+      <select id="stockType" required>
+        <option value="masuk">Stok Masuk (+)</option>
+        <option value="keluar">Stok Keluar (-)</option>
+      </select>
+
+      <input
+        id="stockQuantity"
+        type="number"
+        min="1"
+        step="1"
+        placeholder="Jumlah barang"
+        required
+      >
+
+      <input
+        id="stockNote"
+        type="text"
+        maxlength="100"
+        placeholder="Keterangan (opsional)"
+      >
+
+      <button class="primary-btn" type="submit">
+        Simpan Perubahan Stok
+      </button>
+
+    </form>
+  </div>
+
+  <h3 class="section-title">Riwayat Pergerakan Stok</h3>
+
+  <div id="stockHistory"></div>
+
+</section>
+
+<!-- KEUANGAN -->
+<section class="page" id="keuangan">
+  <h2>Keuangan</h2>
+  <div class="empty" style="margin-top:20px">
+    <h3>💰 Keuangan pribadi & usaha</h3>
+    <p>Pemasukan, pengeluaran, tabungan dan laporan keuangan akan tersedia di sini.</p>
+  </div>
+</section>
+
+</div>
+
+<nav>
+  <button class="active" onclick="showPage('dashboard',this)">
+    <span>⌂</span>Home
+  </button>
+  <button onclick="showPage('produk',this)">
+    <span>▦</span>Produk
+  </button>
+  <button onclick="showPage('kasir',this)">
+    <span>🛒</span>Kasir
+  </button>
+  <button onclick="showPage('stok',this)">
+    <span>▤</span>Stok
+  </button>
+  <button onclick="showPage('keuangan',this)">
+    <span>◈</span>Keuangan
+  </button>
+</nav>
+
+<script>
+function showPage(pageId, button) {
+  document.querySelectorAll('.page').forEach(page => {
+    page.classList.remove('active');
+  });
+
+  document.getElementById(pageId).classList.add('active');
+
+  document.querySelectorAll('nav button').forEach(btn => {
+    btn.classList.remove('active');
+  });
+
+  const navButton = button ||
+    [...document.querySelectorAll('nav button')]
+      .find(btn => btn.getAttribute('onclick').includes(pageId));
+
+  if (navButton) navButton.classList.add('active');
+
+if (pageId === "stok") {
+  renderStock();
+}
+
+if (pageId === "kasir") {
+  renderCashier();
+}
+if (pageId === "laporan") {
+  renderSalesReport();
+}
+  window.scrollTo(0, 0);
+}
+
+// =================================
+// GUNAFAST PRODUCT DATABASE
+// =================================
+
+let products = [];
+
+try {
+  products = JSON.parse(
+    localStorage.getItem("gunafast_products")
+  ) || [];
+} catch (error) {
+  products = [];
+}
+
+let editingProductId = null;
+
+function saveProductData() {
+  localStorage.setItem(
+    "gunafast_products",
+    JSON.stringify(products)
+  );
+}
+
+function rupiah(value) {
+  return "Rp" + Number(value).toLocaleString("id-ID");
+}
+
+function safeText(value) {
+  return String(value).replace(/[&<>"']/g, char => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;"
+  })[char]);
+}
+
+// MENAMPILKAN PRODUK
+function renderProducts() {
+  const list = document.getElementById("productList");
+
+  document.getElementById("totalProduk").textContent =
+    products.length;
+
+  document.getElementById("totalStok").textContent =
+    products.reduce((total, item) => total + Number(item.stock), 0);
+
+  document.getElementById("productCount").textContent =
+    products.length + " barang terdaftar";
+
+  if (products.length === 0) {
+    list.innerHTML = `
+      <div class="empty">
+        <h3>📦 Belum ada barang</h3>
+        <p>Tambahkan barang pertamamu melalui formulir di atas.</p>
+      </div>
+    `;
+    return;
+  }
+
+  list.innerHTML = products.map(item => {
+    const profit = Number(item.sell) - Number(item.buy);
+    const lowStock = Number(item.stock) <= Number(item.minimum);
+
+    return `
+      <div class="product-item">
+        <h3>${safeText(item.name)}</h3>
+
+        <div class="product-info">
+          Kode: ${safeText(item.code)}<br>
+          Kategori: ${safeText(item.category)}<br>
+          Harga beli: ${rupiah(item.buy)}<br>
+          Harga jual: ${rupiah(item.sell)}<br>
+          Keuntungan per unit:
+          <span class="${profit >= 0 ? "green" : "red"}">
+            ${rupiah(profit)}
+          </span><br>
+          Stok: <strong class="${lowStock ? "stock-warning" : "green"}">
+            ${item.stock} unit
+          </strong><br>
+          Batas minimum: ${item.minimum} unit
+        </div>
+
+        <div class="product-actions">
+          <button class="secondary-btn"
+            onclick="editProduct(${item.id})">
+            Edit
+          </button>
+
+          <button class="secondary-btn"
+            onclick="deleteProduct(${item.id})">
+            Hapus
+          </button>
+        </div>
+      </div>
+    `;
+  }).join("");
+}
+
+// MENYIMPAN PRODUK BARU
+document.getElementById("productForm")
+.addEventListener("submit", function(event) {
+  event.preventDefault();
+
+  const name = document.getElementById("productName").value.trim();
+  const code = document.getElementById("productCode").value.trim();
+  const category = document.getElementById("productCategory").value;
+
+  const buy = Number(document.getElementById("buyPrice").value);
+  const sell = Number(document.getElementById("sellPrice").value);
+  const stock = Number(document.getElementById("productStock").value);
+  const minimum = Number(document.getElementById("minimumStock").value);
+
+  if (!name || !code || !category ||
+      !Number.isSafeInteger(buy) || buy < 0 ||
+      !Number.isSafeInteger(sell) || sell < 0 ||
+      !Number.isSafeInteger(stock) || stock < 0 ||
+      !Number.isSafeInteger(minimum) || minimum < 0) {
+    alert("Periksa kembali data barang.");
+    return;
+  }
+
+  const duplicate = products.some(item =>
+    item.code.toLowerCase() === code.toLowerCase() &&
+    item.id !== editingProductId
+  );
+
+  if (duplicate) {
+    alert("Kode barang sudah digunakan.");
+    return;
+  }
+
+  if (editingProductId !== null) {
+    const index = products.findIndex(
+      item => item.id === editingProductId
+    );
+
+    if (index !== -1) {
+      products[index] = {
+        ...products[index],
+        name, code, category, buy, sell, stock, minimum
+      };
+    }
+
+    alert("Produk berhasil diperbarui.");
+  } else {
+    products.push({
+      id: Date.now(),
+      name, code, category, buy, sell, stock, minimum
+    });
+
+    alert("Produk berhasil ditambahkan.");
+  }
+
+  saveProductData();
+  renderProducts();
+  cancelProductEdit();
+});
+
+// EDIT PRODUK
+function editProduct(id) {
+  const item = products.find(product => product.id === id);
+
+  if (!item) return;
+
+  editingProductId = id;
+
+  document.getElementById("productName").value = item.name;
+  document.getElementById("productCode").value = item.code;
+  document.getElementById("productCategory").value = item.category;
+  document.getElementById("buyPrice").value = item.buy;
+  document.getElementById("sellPrice").value = item.sell;
+  document.getElementById("productStock").value = item.stock;
+  document.getElementById("minimumStock").value = item.minimum;
+
+  document.getElementById("formTitle").textContent = "Edit Barang";
+  document.getElementById("saveProduct").textContent = "Perbarui Barang";
+  document.getElementById("cancelEdit").style.display = "block";
+
+  showPage("produk");
+  window.scrollTo(0, 0);
+}
+
+// BATAL EDIT
+function cancelProductEdit() {
+  editingProductId = null;
+
+  document.getElementById("productForm").reset();
+  document.getElementById("minimumStock").value = 5;
+
+  document.getElementById("formTitle").textContent = "＋ Tambah Barang";
+  document.getElementById("saveProduct").textContent = "Simpan Barang";
+  document.getElementById("cancelEdit").style.display = "none";
+}
+
+// HAPUS PRODUK
+function deleteProduct(id) {
+  const item = products.find(product => product.id === id);
+
+  if (!item) return;
+
+  if (confirm("Hapus barang " + item.name + "?")) {
+    products = products.filter(product => product.id !== id);
+
+    saveProductData();
+    renderProducts();
+
+    if (editingProductId === id) {
+      cancelProductEdit();
+    }
+  }
+}
+
+// TAMPILKAN DATA SAAT APLIKASI DIBUKA
+renderProducts();
+
+// =====================================
+// GUNAFAST STOCK MANAGEMENT SYSTEM
+// =====================================
+
+// DATABASE RIWAYAT STOK
+
+let stockHistory = [];
+
+try {
+  stockHistory = JSON.parse(
+    localStorage.getItem("gunafast_stock_history")
+  ) || [];
+} catch (error) {
+  stockHistory = [];
+}
+
+// SIMPAN RIWAYAT STOK
+
+function saveStockHistory() {
+  localStorage.setItem(
+    "gunafast_stock_history",
+    JSON.stringify(stockHistory)
+  );
+}
+
+// DAFTAR PRODUK PADA FORM STOK
+
+function renderStockOptions() {
+  const select = document.getElementById("stockProduct");
+  const previous = select.value;
+
+  select.innerHTML = '<option value="">Pilih barang</option>';
+
+  products.forEach(item => {
+    const option = document.createElement("option");
+    option.value = String(item.id);
+    option.textContent = item.name + " (Stok: " + item.stock + ")";
+    select.appendChild(option);
+  });
+
+  if (products.some(item => String(item.id) === previous)) {
+    select.value = previous;
+  }
+}
+
+// TAMPILKAN RINGKASAN DAN RIWAYAT
+
+function renderStock() {
+  const total = products.reduce(
+    (sum, item) => sum + Number(item.stock), 0
+  );
+
+  const low = products.filter(
+    item => Number(item.stock) <= Number(item.minimum)
+  ).length;
+
+  document.getElementById("stockTotal").textContent = total;
+  document.getElementById("stockLow").textContent = low;
+
+  renderStockOptions();
+
+  const historyElement =
+    document.getElementById("stockHistory");
+
+  if (stockHistory.length === 0) {
+    historyElement.innerHTML = `
+      <div class="empty">
+        <h3>📊 Belum ada riwayat stok</h3>
+        <p>Perubahan stok akan tercatat di sini.</p>
+      </div>
+    `;
+    return;
+  }
+
+  historyElement.innerHTML = [...stockHistory]
+    .reverse()
+    .map(item => {
+      const date = new Date(item.date);
+
+      return `
+        <div class="product-item">
+          <h3>${safeText(item.name)}</h3>
+
+          <div class="product-info">
+            Jenis: ${item.type === "masuk"
+              ? '<span class="green">Stok Masuk</span>'
+              : '<span class="red">Stok Keluar</span>'}<br>
+
+            Jumlah:
+            <strong class="${item.type === "masuk" ? "green" : "red"}">
+              ${item.type === "masuk" ? "+" : "-"}${item.quantity}
+            </strong><br>
+
+            Stok sebelumnya: ${item.before}<br>
+            Stok sekarang: ${item.after}<br>
+
+            Tanggal: ${date.toLocaleString("id-ID")}<br>
+
+            Keterangan: ${safeText(item.note || "-")}
+          </div>
+        </div>
+      `;
+    }).join("");
+}
+
+// PROSES PERUBAHAN STOK
+
+document.getElementById("stockForm")
+.addEventListener("submit", function(event) {
+  event.preventDefault();
+
+  const productId = Number(
+    document.getElementById("stockProduct").value
+  );
+
+  const type = document.getElementById("stockType").value;
+
+  const quantity = Number(
+    document.getElementById("stockQuantity").value
+  );
+
+  const note = document.getElementById("stockNote").value.trim();
+
+  const product = products.find(
+    item => item.id === productId
+  );
+
+  if (!product) {
+    alert("Silakan pilih barang terlebih dahulu.");
+    return;
+  }
+
+  if (!Number.isSafeInteger(quantity) || quantity <= 0) {
+    alert("Jumlah stok harus berupa bilangan bulat positif.");
+    return;
+  }
+
+  const before = Number(product.stock);
+
+  const after = type === "masuk"
+    ? before + quantity
+    : before - quantity;
+
+  if (!Number.isSafeInteger(after) || after < 0) {
+    alert("Stok tidak mencukupi untuk dikeluarkan.");
+    return;
+  }
+
+  const newHistory = {
+    id: Date.now(),
+    productId: product.id,
+    name: product.name,
+    type: type,
+    quantity: quantity,
+    before: before,
+    after: after,
+    note: note,
+    date: new Date().toISOString()
+  };
+
+  const oldStock = product.stock;
+
+  product.stock = after;
+  stockHistory.push(newHistory);
+
+  try {
+    saveProductData();
+    saveStockHistory();
+  } catch (error) {
+    product.stock = oldStock;
+    stockHistory.pop();
+
+    alert("Penyimpanan gagal. Periksa ruang penyimpanan HP.");
+    return;
+  }
+
+  alert(
+    "Stok berhasil diperbarui!\n" +
+    "Stok sebelumnya: " + before +
+    "\nStok sekarang: " + after
+  );
+
+  document.getElementById("stockForm").reset();
+
+  renderStock();
+  renderProducts();
+});
+
+// TAMPILKAN DATA SAAT PERTAMA DIBUKA
+
+renderStock();
+
+// =====================================
+// GUNAFAST POS / CASHIER SYSTEM
+// =====================================
+
+let cart = [];
+let sales = [];
+
+try {
+  sales = JSON.parse(
+    localStorage.getItem("gunafast_sales")
+  ) || [];
+} catch (error) {
+  sales = [];
+}
+
+// FORMAT RUPIAH
+
+function money(value) {
+  return "Rp" + Number(value).toLocaleString("id-ID");
+}
+
+// SIMPAN DATA PENJUALAN
+
+function saveSales() {
+  localStorage.setItem(
+    "gunafast_sales",
+    JSON.stringify(sales)
+  );
+}
+
+// TAMPILKAN PILIHAN PRODUK
+
+function renderCashierProducts() {
+  const select = document.getElementById("cartProduct");
+  const previous = select.value;
+
+  select.innerHTML = '<option value="">Pilih produk</option>';
+
+  products.forEach(item => {
+    if (Number(item.stock) <= 0) return;
+
+    const option = document.createElement("option");
+    option.value = String(item.id);
+    option.textContent =
+      item.name + " - " + money(item.sell) +
+      " (Stok: " + item.stock + ")";
+
+    select.appendChild(option);
+  });
+
+  if (products.some(item =>
+    String(item.id) === previous &&
+    Number(item.stock) > 0
+  )) {
+    select.value = previous;
+  }
+}
+
+// HITUNG JUMLAH BARANG DALAM KERANJANG
+
+function cartSubtotal() {
+  return cart.reduce((total, item) => {
+    return total + item.price * item.quantity;
+  }, 0);
+}
+
+// HITUNG DISKON
+
+function getCartDiscount() {
+  const input = document.getElementById("cartDiscount");
+  const discount = Number(input.value);
+
+  if (!Number.isSafeInteger(discount) || discount < 0) {
+    return 0;
+  }
+
+  return Math.min(discount, cartSubtotal());
+}
+
+// TOTAL PEMBAYARAN
+
+function getGrandTotal() {
+  return cartSubtotal() - getCartDiscount();
+}
+
+// TAMPILKAN KERANJANG
+
+function renderCart() {
+  const list = document.getElementById("cartList");
+
+  if (cart.length === 0) {
+    list.innerHTML = `
+      <div class="empty">
+        <h3>🛒 Keranjang masih kosong</h3>
+        <p>Pilih barang untuk memulai transaksi.</p>
+      </div>
+    `;
+  } else {
+    list.innerHTML = cart.map(item => `
+      <div class="cart-item">
+        <strong>${safeText(item.name)}</strong>
+
+        <p class="product-info">
+          Harga: ${money(item.price)}<br>
+          Jumlah: ${item.quantity}<br>
+          Total: ${money(item.price * item.quantity)}
+        </p>
+
+        <div class="cart-controls">
+          <button onclick="changeCart(${item.id},-1)">−</button>
+
+          <strong>${item.quantity}</strong>
+
+          <button onclick="changeCart(${item.id},1)">+</button>
+
+          <button onclick="removeCart(${item.id})">
+            Hapus
+          </button>
+        </div>
+      </div>
+    `).join("");
+  }
+
+  document.getElementById("cartSubtotal").textContent =
+    money(cartSubtotal());
+
+  document.getElementById("cartDiscountLabel").textContent =
+    money(getCartDiscount());
+
+  document.getElementById("cartGrandTotal").textContent =
+    money(getGrandTotal());
+
+  calculateChange();
+}
+
+// TAMBAHKAN BARANG
+
+document.getElementById("cartForm")
+.addEventListener("submit", function(event) {
+  event.preventDefault();
+
+  const id = Number(
+    document.getElementById("cartProduct").value
+  );
+
+  const quantity = Number(
+    document.getElementById("cartQuantity").value
+  );
+
+  const product = products.find(item => item.id === id);
+
+  if (!product) {
+    alert("Pilih produk terlebih dahulu.");
+    return;
+  }
+
+  if (!Number.isSafeInteger(quantity) || quantity <= 0) {
+    alert("Jumlah barang tidak valid.");
+    return;
+  }
+
+  const existing = cart.find(item => item.id === id);
+
+  const currentQuantity = existing
+    ? existing.quantity : 0;
+
+  if (currentQuantity + quantity > Number(product.stock)) {
+    alert("Stok tidak mencukupi!");
+    return;
+  }
+
+  if (existing) {
+    existing.quantity += quantity;
+  } else {
+    cart.push({
+      id: product.id,
+      name: product.name,
+      price: Number(product.sell),
+      buy: Number(product.buy),
+      quantity: quantity
+    });
+  }
+
+  document.getElementById("cartQuantity").value = 1;
+
+  renderCart();
+  renderCashierProducts();
+});
+
+// TAMBAH / KURANGI JUMLAH KERANJANG
+
+function changeCart(id, amount) {
+  const item = cart.find(item => item.id === id);
+  const product = products.find(item => item.id === id);
+
+  if (!item || !product) return;
+
+  const newQuantity = item.quantity + amount;
+
+  if (newQuantity <= 0) {
+    removeCart(id);
+    return;
+  }
+
+  if (newQuantity > Number(product.stock)) {
+    alert("Jumlah melebihi stok tersedia.");
+    return;
+  }
+
+  item.quantity = newQuantity;
+  renderCart();
+}
+
+// HAPUS BARANG DARI KERANJANG
+
+function removeCart(id) {
+  cart = cart.filter(item => item.id !== id);
+  renderCart();
+  renderCashierProducts();
+}
+
+// HITUNG KEMBALIAN
+
+function calculateChange() {
+  const received = Number(
+    document.getElementById("cashReceived").value
+  ) || 0;
+
+  const change = received - getGrandTotal();
+
+  document.getElementById("cashChange").textContent =
+    money(Math.max(0, change));
+}
+
+// PERBARUI TOTAL SAAT DISKON / UANG DIUBAH
+
+document.getElementById("cartDiscount")
+.addEventListener("input", renderCart);
+
+document.getElementById("cashReceived")
+.addEventListener("input", calculateChange);
+
+// PROSES TRANSAKSI
+
+function checkoutSale() {
+  if (cart.length === 0) {
+    alert("Keranjang masih kosong.");
+    return;
+  }
+
+  const subtotal = cartSubtotal();
+  const discount = getCartDiscount();
+  const total = subtotal - discount;
+
+  const received = Number(
+    document.getElementById("cashReceived").value
+  );
+
+  if (!Number.isSafeInteger(received) || received < total) {
+    alert("Uang pembayaran belum mencukupi.");
+    return;
+  }
+
+  // PERIKSA ULANG STOK
+
+  for (const item of cart) {
+    const product = products.find(p => p.id === item.id);
+
+    if (!product || Number(product.stock) < item.quantity) {
+      alert("Stok " + item.name + " tidak mencukupi.");
+      return;
+    }
+  }
+
+  const saleItems = cart.map(item => ({
+    ...item
+  }));
+
+  const cost = saleItems.reduce(
+    (sum, item) => sum + item.buy * item.quantity, 0
+  );
+
+  const profit = total - cost;
+
+  const now = new Date();
+
+  const sale = {
+    id: Date.now(),
+    invoice: "GF-" + now.getTime(),
+    date: now.toISOString(),
+    items: saleItems,
+    subtotal: subtotal,
+    discount: discount,
+    total: total,
+    received: received,
+    change: received - total,
+    cost: cost,
+    profit: profit
+  };
+
+  // SIAPKAN PERUBAHAN STOK
+
+  const oldProducts = JSON.stringify(products);
+  const oldHistory = JSON.stringify(stockHistory);
+  const oldSales = JSON.stringify(sales);
+
+  try {
+    saleItems.forEach(item => {
+      const product = products.find(p => p.id === item.id);
+
+      const before = Number(product.stock);
+      const after = before - item.quantity;
+
+      product.stock = after;
+
+      stockHistory.push({
+        id: Date.now() + Math.random(),
+        productId: product.id,
+        name: product.name,
+        type: "keluar",
+        quantity: item.quantity,
+        before: before,
+        after: after,
+        note: "Penjualan " + sale.invoice,
+        date: now.toISOString()
+      });
+    });
+
+    sales.push(sale);
+
+    saveProductData();
+    saveStockHistory();
+    saveSales();
+
+  } catch (error) {
+    products = JSON.parse(oldProducts);
+    stockHistory = JSON.parse(oldHistory);
+    sales = JSON.parse(oldSales);
+
+    // Pulihkan data tersimpan sebelumnya jika memungkinkan.
+    try {
+      localStorage.setItem("gunafast_products", oldProducts);
+      localStorage.setItem("gunafast_stock_history", oldHistory);
+      localStorage.setItem("gunafast_sales", oldSales);
+    } catch (restoreError) {}
+
+    alert("Transaksi gagal disimpan. Silakan coba lagi.");
+    return;
+  }
+
+  cart = [];
+
+  document.getElementById("cartForm").reset();
+  document.getElementById("cartDiscount").value = 0;
+  document.getElementById("cashReceived").value = "";
+
+  renderCart();
+  renderCashierProducts();
+  renderProducts();
+  renderStock();
+  renderSalesHistory();
+  showReceipt(sale);
+
+  alert("Transaksi berhasil disimpan!");
+}
+
+// TAMPILKAN STRUK
+
+function showReceipt(sale) {
+  const area = document.getElementById("receiptArea");
+
+  area.innerHTML = `
+    <div class="receipt" id="receiptPrint">
+      <h2>GUNAFAST</h2>
+      <p>BUKTI TRANSAKSI PENJUALAN</p>
+      <hr>
+      <p>Invoice: ${safeText(sale.invoice)}</p>
+      <p>Tanggal: ${new Date(sale.date).toLocaleString("id-ID")}</p>
+      <hr>
+
+      ${sale.items.map(item => `
+        <p>
+          ${safeText(item.name)} x ${item.quantity}<br>
+          ${money(item.price * item.quantity)}
+        </p>
+      `).join("")}
+
+      <hr>
+      <p>Subtotal: ${money(sale.subtotal)}</p>
+      <p>Diskon: ${money(sale.discount)}</p>
+      <h3>Total: ${money(sale.total)}</h3>
+      <p>Dibayar: ${money(sale.received)}</p>
+      <p>Kembalian: ${money(sale.change)}</p>
+      <hr>
+      <p>Terima kasih telah berbelanja.</p>
+
+      <button class="primary-btn"
+        onclick="printReceipt('${sale.invoice}')">
+        Cetak / Simpan Struk
+      </button>
+    </div>
+  `;
+
+  area.scrollIntoView({behavior:"smooth"});
+}
+
+// CETAK STRUK
+
+function printReceipt(invoice) {
+  const receipt = document.getElementById("receiptPrint");
+
+  if (!receipt) return;
+
+  const printWindow = window.open("", "_blank");
+
+  if (!printWindow) {
+    alert("Izinkan pop-up browser untuk mencetak struk.");
+    return;
+  }
+
+  printWindow.document.write(`
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <title>${safeText(invoice)}</title>
+      <style>
+        body {
+          font-family: Arial, sans-serif;
+          color: #111;
+          padding: 20px;
+          max-width: 380px;
+          margin: auto;
+        }
+        h2 { text-align: center; }
+        p { line-height: 1.5; }
+        button { display:none; }
+        hr { border:0; border-top:1px dashed #777; }
+      </style>
+    </head>
+    <body>
+      ${receipt.innerHTML}
+    </body>
+    </html>
+  `);
+
+  printWindow.document.close();
+  printWindow.focus();
+
+  setTimeout(() => printWindow.print(), 500);
+}
+
+// RIWAYAT TRANSAKSI
+
+function renderSalesHistory() {
+  const element = document.getElementById("salesHistory");
+
+  if (sales.length === 0) {
+    element.innerHTML = `
+      <div class="empty">
+        <h3>Belum ada transaksi</h3>
+        <p>Transaksi penjualan akan tercatat di sini.</p>
+      </div>
+    `;
+    return;
+  }
+
+  element.innerHTML = [...sales].reverse().map(sale => `
+    <div class="sale-history-item">
+      <strong>${safeText(sale.invoice)}</strong>
+
+      <p class="product-info">
+        ${new Date(sale.date).toLocaleString("id-ID")}<br>
+        ${sale.items.length} jenis barang<br>
+        Total: <strong class="green">${money(sale.total)}</strong><br>
+        Laba transaksi: ${money(sale.profit)}
+      </p>
+
+      <button class="secondary-btn"
+        style="width:100%;margin-top:10px"
+        onclick="showPastReceipt('${sale.invoice}')">
+        Lihat Struk
+      </button>
+    </div>
+  `).join("");
+}
+
+// BUKA STRUK TRANSAKSI LAMA
+
+function showPastReceipt(invoice) {
+  const sale = sales.find(item => item.invoice === invoice);
+
+  if (sale) showReceipt(sale);
+}
+
+// INISIALISASI KASIR
+
+function renderCashier() {
+  renderCashierProducts();
+  renderCart();
+  renderSalesHistory();
+}
+
+renderCashier();
+
+// =================================
+// GUNAFAST - LAPORAN PENJUALAN
+// =================================
+
+let reportFilter = "all";
+
+function renderSalesReport() {
+  const page = document.getElementById("laporan");
+  if (!page) return;
+
+  const allSales = Array.isArray(sales) ? sales : [];
+  const now = new Date();
+
+  const filteredSales = allSales.filter(sale => {
+    const date = new Date(sale.date);
+    if (isNaN(date.getTime())) return false;
+
+    if (reportFilter === "today") {
+      return date.toDateString() === now.toDateString();
+    }
+
+    if (reportFilter === "7days") {
+      return now - date <= 7 * 86400000 &&
+        date <= now;
+    }
+
+    if (reportFilter === "30days") {
+      return now - date <= 30 * 86400000 &&
+        date <= now;
+    }
+
+    return true;
+  });
+
+  const omzet = filteredSales.reduce(
+    (sum, sale) => sum + Number(sale.total || 0), 0
+  );
+
+  const keuntungan = filteredSales.reduce(
+    (sum, sale) => sum + Number(sale.profit || 0), 0
+  );
+
+  const totalTransaksi = filteredSales.length;
+
+  // Menghitung produk terlaris
+  const productTotals = {};
+
+  filteredSales.forEach(sale => {
+    (sale.items || []).forEach(item => {
+      const id = item.id;
+      const product = products.find(p => p.id === id);
+      const name = product?.name || item.name || "Produk";
+      const quantity = Number(item.quantity || 0);
+
+      if (!productTotals[id]) {
+        productTotals[id] = {
+          name: name,
+          quantity: 0
+        };
+      }
+
+      productTotals[id].quantity += quantity;
+    });
+  });
+
+  const bestProducts = Object.values(productTotals)
+    .sort((a, b) => b.quantity - a.quantity)
+    .slice(0, 5);
+
+  // Grafik 7 hari terakhir
+  const days = [];
+
+  for (let i = 6; i >= 0; i--) {
+    const date = new Date();
+    date.setDate(date.getDate() - i);
+
+    const total = filteredSales
+      .filter(sale =>
+        new Date(sale.date).toDateString() === date.toDateString()
+      )
+      .reduce((sum, sale) => sum + Number(sale.total || 0), 0);
+
+    days.push({
+      label: date.toLocaleDateString("id-ID", {
+        day: "numeric",
+        month: "short"
+      }),
+      total
+    });
+  }
+
+  const maxTotal = Math.max(...days.map(d => d.total), 1);
+
+  page.innerHTML = `
+    <div class="report-wrap">
+      <h2>Laporan Penjualan</h2>
+      <p class="report-muted">Ringkasan performa usaha GUNAFAST</p>
+
+      <select id="reportFilter" class="report-select"
+        onchange="reportFilter=this.value;renderSalesReport()">
+        <option value="all" ${reportFilter === "all" ? "selected" : ""}>Semua waktu</option>
+        <option value="today" ${reportFilter === "today" ? "selected" : ""}>Hari ini</option>
+        <option value="7days" ${reportFilter === "7days" ? "selected" : ""}>7 hari terakhir</option>
+        <option value="30days" ${reportFilter === "30days" ? "selected" : ""}>30 hari terakhir</option>
+      </select>
+
+      <div class="report-grid">
+        <div class="report-card">
+          <small>Total omzet</small>
+          <h3>${money(omzet)}</h3>
+        </div>
+        <div class="report-card">
+          <small>Keuntungan</small>
+          <h3>${money(keuntungan)}</h3>
+        </div>
+        <div class="report-card">
+          <small>Transaksi</small>
+          <h3>${totalTransaksi}</h3>
+        </div>
+        <div class="report-card">
+          <small>Rata-rata transaksi</small>
+          <h3>${money(totalTransaksi ? omzet / totalTransaksi : 0)}</h3>
+        </div>
+      </div>
+
+      <div class="report-panel">
+        <h3>Grafik penjualan 7 hari</h3>
+        <div class="report-chart">
+          ${days.map(day => `
+            <div class="report-bar-item">
+              <div class="report-bar-value">${day.total ? "Rp" + Math.round(day.total / 1000) + "k" : ""}</div>
+              <div class="report-bar"
+                style="height:${Math.max(day.total / maxTotal * 130, 3)}px">
+              </div>
+              <small>${day.label}</small>
+            </div>
+          `).join("")}
+        </div>
+      </div>
+
+      <div class="report-panel">
+        <h3>Produk paling laris</h3>
+        ${bestProducts.length ? bestProducts.map((item, index) => `
+          <div class="report-product">
+            <span>${index + 1}. ${item.name}</span>
+            <strong>${item.quantity} terjual</strong>
+          </div>
+        `).join("") : `<p class="report-muted">Belum ada data produk.</p>`}
+      </div>
+
+      <div class="report-panel">
+        <h3>Riwayat transaksi</h3>
+        ${filteredSales.length ? [...filteredSales].reverse().map(sale => `
+          <div class="report-product">
+            <div>
+              <strong>${sale.invoice || "Transaksi"}</strong>
+              <small class="report-muted">
+                ${new Date(sale.date).toLocaleString("id-ID")}
+              </small>
+            </div>
+            <strong>${money(sale.total)}</strong>
+          </div>
+        `).join("") : `<p class="report-muted">Belum ada transaksi pada periode ini.</p>`}
+      </div>
+    </div>
+  `;
+}
+
+// Membuat menu dan halaman laporan otomatis
+function setupSalesReport() {
+  if (document.getElementById("laporan")) return;
+
+  const nav = document.querySelector("nav");
+  const existingPage = document.querySelector(".page");
+
+  if (!nav || !existingPage) {
+    console.warn("GUNAFAST: navigasi atau halaman belum ditemukan.");
+    return;
+  }
+
+  const reportButton = document.createElement("button");
+  reportButton.type = "button";
+  reportButton.className = nav.querySelector("button")?.className || "";
+  reportButton.textContent = "Laporan";
+  reportButton.setAttribute(
+    "onclick",
+    "showPage('laporan', this)"
+  );
+  nav.appendChild(reportButton);
+
+  const reportPage = document.createElement("section");
+  reportPage.id = "laporan";
+  reportPage.className = "page";
+  existingPage.parentElement.appendChild(reportPage);
+}
+
+// Tampilan laporan
+const reportStyle = document.createElement("style");
+
+reportStyle.textContent = `
+.report-wrap {
+  padding: 16px;
+  color: var(--text, inherit);
+}
+.report-muted {
+  opacity: .65;
+  font-size: 12px;
+}
+.report-select {
+  width: 100%;
+  padding: 12px;
+  margin: 12px 0;
+  border-radius: 10px;
+  border: 1px solid #8885;
+  background: var(--card-bg, #fff);
+  color: inherit;
+}
+.report-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+.report-card, .report-panel {
+  padding: 14px;
+  margin-bottom: 12px;
+  border-radius: 13px;
+  background: var(--card-bg, #f1f1f1);
+  border: 1px solid #8883;
+}
+.report-card small {
+  font-size: 12px;
+  opacity: .7;
+}
+.report-card h3 {
+  font-size: 17px;
+  overflow-wrap: anywhere;
+  margin: 8px 0 0;
+}
+.report-panel h3 {
+  margin: 0 0 14px;
+  font-size: 16px;
+}
+.report-chart {
+  display: flex;
+  align-items: end;
+  justify-content: space-around;
+  gap: 7px;
+  min-height: 175px;
+  padding-top: 15px;
+}
+.report-bar-item {
+  flex: 1;
+  text-align: center;
+  min-width: 0;
+}
+.report-bar {
+  background: #7161d9;
+  border-radius: 6px 6px 0 0;
+  min-height: 3px;
+  max-width: 35px;
+  margin: 0 auto;
+}
+.report-bar-item small {
+  display: block;
+  font-size: 10px;
+  margin-top: 7px;
+}
+.report-bar-value {
+  font-size: 9px;
+  min-height: 14px;
+  overflow-wrap: anywhere;
+}
+.report-product {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 0;
+  border-bottom: 1px solid #8883;
+  font-size: 13px;
+}
+.report-product:last-child {
+  border-bottom: 0;
+}
+.report-product small {
+  display: block;
+  margin-top: 5px;
+}
+`;
+
+reportStyle.textContent += `
+.report-card,
+.report-panel {
+  background: #151d35 !important;
+  color: #f1f5f9 !important;
+}
+
+.report-card small,
+.report-muted {
+  color: #aab4cc !important;
+}
+
+.report-card h3,
+.report-panel h3,
+.report-product {
+  color: #f1f5f9 !important;
+}
+
+.report-select {
+  background: #151d35 !important;
+  color: #ffffff !important;
+  border-color: #343f60 !important;
+  color-scheme: dark;
+}
+
+.report-product strong {
+  color: #ffffff !important;
+}
+`;
+
+document.head.appendChild(reportStyle);
+setupSalesReport();
+
+/* ==================================
+   GUNAFAST - KEUANGAN USAHA
+================================== */
+
+let gfFinanceEntries = [];
+
+try {
+  gfFinanceEntries = JSON.parse(
+    localStorage.getItem("gunafast_finance_entries") || "[]"
+  );
+  if (!Array.isArray(gfFinanceEntries)) {
+    gfFinanceEntries = [];
+  }
+} catch (error) {
+  gfFinanceEntries = [];
+}
+
+function gfSaveFinance() {
+  localStorage.setItem(
+    "gunafast_finance_entries",
+    JSON.stringify(gfFinanceEntries)
+  );
+}
+
+function gfEscapeFinance(value) {
+  return String(value).replace(/[&<>"']/g, char => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;"
+  })[char]);
+}
+
+function gfRenderFinance() {
+  const page = document.getElementById("keuangan");
+  if (!page) return;
+
+  let container = document.getElementById("gfFinanceModule");
+
+  if (!container) {
+    container = document.createElement("div");
+    container.id = "gfFinanceModule";
+    page.appendChild(container);
+  }
+
+  const allSales = typeof sales !== "undefined" &&
+    Array.isArray(sales) ? sales : [];
+
+  const salesIncome = allSales.reduce(
+    (sum, item) => sum + Number(item.total || 0), 0
+  );
+
+  const otherIncome = gfFinanceEntries
+    .filter(item => item.type === "income")
+    .reduce((sum, item) => sum + Number(item.amount || 0), 0);
+
+  const expenses = gfFinanceEntries
+    .filter(item => item.type === "expense")
+    .reduce((sum, item) => sum + Number(item.amount || 0), 0);
+
+  const totalIncome = salesIncome + otherIncome;
+  const balance = totalIncome - expenses;
+
+  const sortedEntries = [...gfFinanceEntries].sort(
+    (a, b) => new Date(b.date) - new Date(a.date)
+  );
+
+  container.innerHTML = `
+    <div class="gf-finance">
+
+      <h2>Keuangan Usaha</h2>
+      <p class="gf-muted">
+        Pantau pemasukan dan pengeluaran bisnis
+      </p>
+
+      <div class="gf-finance-grid">
+
+        <div class="gf-finance-card">
+          <small>Penjualan kasir</small>
+          <h3>${money(salesIncome)}</h3>
+        </div>
+
+        <div class="gf-finance-card">
+          <small>Pemasukan tambahan</small>
+          <h3>${money(otherIncome)}</h3>
+        </div>
+
+        <div class="gf-finance-card">
+          <small>Total pengeluaran</small>
+          <h3>${money(expenses)}</h3>
+        </div>
+
+        <div class="gf-finance-card">
+          <small>Saldo arus kas</small>
+          <h3>${money(balance)}</h3>
+        </div>
+
+      </div>
+
+      <div class="gf-finance-panel">
+        <h3>Tambah catatan keuangan</h3>
+
+        <form id="gfFinanceForm">
+
+          <label>Jenis transaksi</label>
+          <select id="gfFinanceType" required>
+            <option value="income">Pemasukan tambahan</option>
+            <option value="expense">Pengeluaran</option>
+          </select>
+
+          <label>Kategori</label>
+          <select id="gfFinanceCategory" required>
+            <option value="Penjualan lain">Penjualan lain</option>
+            <option value="Modal tambahan">Modal tambahan</option>
+            <option value="Operasional">Operasional</option>
+            <option value="Bahan baku">Bahan baku</option>
+            <option value="Transportasi">Transportasi</option>
+            <option value="Listrik dan air">Listrik dan air</option>
+            <option value="Sewa">Sewa</option>
+            <option value="Peralatan">Peralatan</option>
+            <option value="Lainnya">Lainnya</option>
+          </select>
+
+          <label>Nominal rupiah</label>
+          <input
+            id="gfFinanceAmount"
+            type="number"
+            min="1"
+            step="1"
+            placeholder="Contoh: 50000"
+            required
+          >
+
+          <label>Keterangan</label>
+          <input
+            id="gfFinanceNote"
+            type="text"
+            maxlength="100"
+            placeholder="Contoh: membeli bahan baku"
+          >
+
+          <label>Tanggal</label>
+          <input
+            id="gfFinanceDate"
+            type="date"
+            value="${new Date().toISOString().slice(0, 10)}"
+            required
+          >
+
+          <button type="submit" class="gf-finance-submit">
+            Simpan transaksi
+          </button>
+
+        </form>
+      </div>
+
+      <div class="gf-finance-panel">
+        <h3>Riwayat keuangan</h3>
+
+        ${
+          sortedEntries.length
+          ? sortedEntries.map(item => `
+            <div class="gf-finance-row">
+              <div>
+                <strong>${gfEscapeFinance(item.category)}</strong>
+                <small>
+                  ${gfEscapeFinance(item.note || "Tanpa keterangan")}
+                </small>
+                <small>${gfEscapeFinance(item.date)}</small>
+              </div>
+
+              <div class="${
+                item.type === "income" ? "gf-income" : "gf-expense"
+              }">
+                <strong>
+                  ${item.type === "income" ? "+" : "-"}
+                  ${money(item.amount)}
+                </strong>
+                <button
+                  type="button"
+                  onclick="gfDeleteFinance('${item.id}')"
+                  class="gf-delete"
+                >Hapus</button>
+              </div>
+            </div>
+          `).join("")
+          : `<p class="gf-muted">Belum ada catatan keuangan.</p>`
+        }
+      </div>
+
+      <p class="gf-muted">
+        Catatan: saldo ini merupakan perhitungan arus kas,
+        bukan saldo rekening bank.
+      </p>
+
+    </div>
+  `;
+
+  document.getElementById("gfFinanceForm")
+    .addEventListener("submit", gfAddFinance);
+}
+
+function gfAddFinance(event) {
+  event.preventDefault();
+
+  const type = document.getElementById("gfFinanceType").value;
+  const category = document.getElementById("gfFinanceCategory").value;
+  const amount = Number(
+    document.getElementById("gfFinanceAmount").value
+  );
+  const note = document.getElementById("gfFinanceNote").value.trim();
+  const date = document.getElementById("gfFinanceDate").value;
+
+  if (!Number.isSafeInteger(amount) || amount <= 0 || !date) {
+    alert("Masukkan nominal dan tanggal yang valid.");
+    return;
+  }
+
+  gfFinanceEntries.push({
+    id: "GF-FIN-" + Date.now() + "-" +
+      Math.random().toString(36).slice(2, 7),
+    type,
+    category,
+    amount,
+    note,
+    date
+  });
+
+  try {
+    gfSaveFinance();
+  } catch (error) {
+    gfFinanceEntries.pop();
+    alert("Data gagal disimpan. Periksa ruang penyimpanan browser.");
+    return;
+  }
+
+  gfRenderFinance();
+  alert("Catatan keuangan berhasil disimpan.");
+}
+
+function gfDeleteFinance(id) {
+  if (!confirm("Hapus catatan keuangan ini?")) return;
+
+  const oldEntries = gfFinanceEntries;
+
+  gfFinanceEntries = gfFinanceEntries.filter(
+    item => item.id !== id
+  );
+
+  try {
+    gfSaveFinance();
+    gfRenderFinance();
+  } catch (error) {
+    gfFinanceEntries = oldEntries;
+    alert("Gagal menghapus catatan.");
+  }
+}
+
+// Hubungkan dengan halaman Keuangan
+const gfOldShowPage = showPage;
+
+showPage = function(pageId, button) {
+  gfOldShowPage(pageId, button);
+
+  if (pageId === "keuangan") {
+    gfRenderFinance();
+  }
+};
+
+// Tampilkan modul saat aplikasi dibuka
+gfRenderFinance();
+
+// Tampilan khusus modul keuangan
+const gfFinanceStyle = document.createElement("style");
+
+gfFinanceStyle.textContent = `
+.gf-finance {
+  padding: 16px;
+  color: #f4f6ff;
+}
+.gf-muted {
+  opacity: .65;
+  font-size: 12px;
+}
+.gf-finance-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 18px 0;
+}
+.gf-finance-card,
+.gf-finance-panel {
+  background: #141a30;
+  border: 1px solid #303a5a;
+  border-radius: 14px;
+  padding: 15px;
+  margin-bottom: 13px;
+}
+.gf-finance-card small {
+  font-size: 12px;
+  opacity: .7;
+}
+.gf-finance-card h3 {
+  font-size: 17px;
+  overflow-wrap: anywhere;
+}
+.gf-finance-panel h3 {
+  margin-top: 0;
+}
+.gf-finance label {
+  display: block;
+  margin: 13px 0 6px;
+  font-size: 13px;
+}
+.gf-finance input,
+.gf-finance select {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 12px;
+  border-radius: 9px;
+  border: 1px solid #384365;
+  background: #0c1124;
+  color: #fff;
+  color-scheme: dark;
+}
+.gf-finance-submit {
+  width: 100%;
+  padding: 13px;
+  margin-top: 17px;
+  border: 0;
+  border-radius: 10px;
+  background: #7864df;
+  color: white;
+  font-weight: bold;
+}
+.gf-finance-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  padding: 13px 0;
+  border-bottom: 1px solid #303a5a;
+  font-size: 13px;
+}
+.gf-finance-row small {
+  display: block;
+  opacity: .65;
+  margin-top: 5px;
+}
+.gf-income {
+  color: #52d6a2;
+  text-align: right;
+}
+.gf-expense {
+  color: #ff778d;
+  text-align: right;
+}
+.gf-delete {
+  display: block;
+  margin-top: 6px;
+  border: 0;
+  background: transparent;
+  color: #ff778d;
+}
+`;
+
+document.head.appendChild(gfFinanceStyle);
+
+/* =====================================
+   GUNAFAST - KEUANGAN PRIBADI
+===================================== */
+
+let gfPersonalEntries = [];
+
+try {
+  gfPersonalEntries = JSON.parse(
+    localStorage.getItem("gunafast_personal_entries") || "[]"
+  );
+
+  if (!Array.isArray(gfPersonalEntries)) {
+    gfPersonalEntries = [];
+  }
+} catch (error) {
+  gfPersonalEntries = [];
+}
+
+function gfSavePersonal() {
+  localStorage.setItem(
+    "gunafast_personal_entries",
+    JSON.stringify(gfPersonalEntries)
+  );
+}
+
+function gfRenderPersonalFinance() {
+  const page = document.getElementById("keuangan");
+  if (!page) return;
+
+  let box = document.getElementById("gfPersonalModule");
+
+  if (!box) {
+    box = document.createElement("div");
+    box.id = "gfPersonalModule";
+
+    const businessModule = document.getElementById("gfFinanceModule");
+
+    if (businessModule) {
+      businessModule.after(box);
+    } else {
+      page.appendChild(box);
+    }
+  }
+
+  const income = gfPersonalEntries
+    .filter(item => item.type === "income")
+    .reduce((sum, item) => sum + Number(item.amount), 0);
+
+  const expense = gfPersonalEntries
+    .filter(item => item.type === "expense")
+    .reduce((sum, item) => sum + Number(item.amount), 0);
+
+  const balance = income - expense;
+
+  const history = [...gfPersonalEntries].sort(
+    (a, b) => new Date(b.date) - new Date(a.date)
+  );
+
+  box.innerHTML = `
+    <div class="gf-personal">
+
+      <div class="gf-personal-heading">
+        <h2>Keuangan Pribadi</h2>
+        <p>Kelola uang pribadi secara terpisah dari bisnis.</p>
+      </div>
+
+      <div class="gf-personal-grid">
+
+        <div class="gf-personal-card">
+          <small>Total pemasukan</small>
+          <h3>${money(income)}</h3>
+        </div>
+
+        <div class="gf-personal-card">
+          <small>Total pengeluaran</small>
+          <h3>${money(expense)}</h3>
+        </div>
+
+        <div class="gf-personal-card gf-personal-balance">
+          <small>Saldo pribadi</small>
+          <h3>${money(balance)}</h3>
+        </div>
+
+      </div>
+
+      <div class="gf-personal-panel">
+        <h3>Tambah transaksi pribadi</h3>
+
+        <form id="gfPersonalForm">
+
+          <label>Jenis transaksi</label>
+          <select id="gfPersonalType" required>
+            <option value="income">Pemasukan</option>
+            <option value="expense">Pengeluaran</option>
+          </select>
+
+          <label>Kategori</label>
+          <select id="gfPersonalCategory" required>
+            <option value="Uang saku">Uang saku</option>
+            <option value="Gaji">Gaji</option>
+            <option value="Freelance">Freelance</option>
+            <option value="Hadiah">Hadiah</option>
+            <option value="Makanan">Makanan</option>
+            <option value="Transportasi">Transportasi</option>
+            <option value="Pendidikan">Pendidikan</option>
+            <option value="Tabungan">Tabungan</option>
+            <option value="Hiburan">Hiburan</option>
+            <option value="Lainnya">Lainnya</option>
+          </select>
+
+          <label>Nominal (Rp)</label>
+          <input
+            id="gfPersonalAmount"
+            type="number"
+            min="1"
+            step="1"
+            placeholder="Contoh: 20000"
+            required
+          >
+
+          <label>Keterangan</label>
+          <input
+            id="gfPersonalNote"
+            type="text"
+            maxlength="100"
+            placeholder="Contoh: uang saku mingguan"
+          >
+
+          <label>Tanggal</label>
+          <input
+            id="gfPersonalDate"
+            type="date"
+            value="${new Date().toLocaleDateString("en-CA")}"
+            required
+          >
+
+          <button type="submit" class="gf-personal-submit">
+            Simpan transaksi pribadi
+          </button>
+
+        </form>
+      </div>
+
+      <div class="gf-personal-panel">
+        <h3>Riwayat transaksi pribadi</h3>
+
+        ${
+          history.length
+          ? history.map(item => `
+            <div class="gf-personal-row">
+              <div>
+                <strong>${gfEscapeFinance(item.category)}</strong>
+                <small>${gfEscapeFinance(item.note || "Tanpa keterangan")}</small>
+                <small>${gfEscapeFinance(item.date)}</small>
+              </div>
+
+              <div class="${
+                item.type === "income"
+                  ? "gf-personal-income"
+                  : "gf-personal-expense"
+              }">
+                <strong>
+                  ${item.type === "income" ? "+" : "-"}
+                  ${money(item.amount)}
+                </strong>
+
+                <button
+                  type="button"
+                  onclick="gfDeletePersonal('${item.id}')"
+                >Hapus</button>
+              </div>
+            </div>
+          `).join("")
+          : `<p class="gf-personal-muted">Belum ada transaksi pribadi.</p>`
+        }
+
+      </div>
+
+    </div>
+  `;
+
+  document.getElementById("gfPersonalForm")
+    .addEventListener("submit", gfAddPersonal);
+}
+
+function gfAddPersonal(event) {
+  event.preventDefault();
+
+  const type = document.getElementById("gfPersonalType").value;
+  const category = document.getElementById("gfPersonalCategory").value;
+  const amount = Number(
+    document.getElementById("gfPersonalAmount").value
+  );
+  const note = document.getElementById("gfPersonalNote").value.trim();
+  const date = document.getElementById("gfPersonalDate").value;
+
+  if (!Number.isSafeInteger(amount) || amount <= 0 || !date) {
+    alert("Masukkan nominal dan tanggal yang valid.");
+    return;
+  }
+
+  const entry = {
+    id: "GF-PER-" + Date.now() + "-" +
+      Math.random().toString(36).slice(2, 7),
+    type,
+    category,
+    amount,
+    note,
+    date
+  };
+
+  gfPersonalEntries.push(entry);
+
+  try {
+    gfSavePersonal();
+  } catch (error) {
+    gfPersonalEntries.pop();
+    alert("Data gagal disimpan.");
+    return;
+  }
+
+  gfRenderPersonalFinance();
+  alert("Transaksi pribadi berhasil disimpan.");
+}
+
+function gfDeletePersonal(id) {
+  if (!confirm("Hapus transaksi pribadi ini?")) return;
+
+  const oldEntries = gfPersonalEntries;
+
+  gfPersonalEntries = gfPersonalEntries.filter(
+    item => item.id !== id
+  );
+
+  try {
+    gfSavePersonal();
+    gfRenderPersonalFinance();
+  } catch (error) {
+    gfPersonalEntries = oldEntries;
+    alert("Gagal menghapus transaksi.");
+  }
+}
+
+// Gabungkan dengan halaman keuangan usaha
+const gfOriginalRenderFinance = gfRenderFinance;
+
+gfRenderFinance = function() {
+  gfOriginalRenderFinance();
+  gfRenderPersonalFinance();
+};
+
+// Tampilan keuangan pribadi
+const gfPersonalStyle = document.createElement("style");
+
+gfPersonalStyle.textContent = `
+.gf-personal {
+  padding: 16px;
+  color: #f4f6ff;
+  border-top: 2px solid #303a5a;
+  margin-top: 20px;
+}
+.gf-personal-heading p,
+.gf-personal-muted {
+  opacity: .65;
+  font-size: 12px;
+}
+.gf-personal-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 15px 0;
+}
+.gf-personal-card,
+.gf-personal-panel {
+  background: #141a30;
+  border: 1px solid #303a5a;
+  border-radius: 14px;
+  padding: 15px;
+  margin-bottom: 13px;
+}
+.gf-personal-card small {
+  font-size: 12px;
+  opacity: .7;
+}
+.gf-personal-card h3 {
+  font-size: 17px;
+  overflow-wrap: anywhere;
+}
+.gf-personal-balance {
+  grid-column: 1 / -1;
+}
+.gf-personal label {
+  display: block;
+  margin: 13px 0 6px;
+  font-size: 13px;
+}
+.gf-personal input,
+.gf-personal select {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 12px;
+  border-radius: 9px;
+  border: 1px solid #384365;
+  background: #0c1124;
+  color: white;
+  color-scheme: dark;
+}
+.gf-personal-submit {
+  width: 100%;
+  padding: 13px;
+  margin-top: 17px;
+  border: 0;
+  border-radius: 10px;
+  background: #7864df;
+  color: white;
+  font-weight: bold;
+}
+.gf-personal-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  padding: 13px 0;
+  border-bottom: 1px solid #303a5a;
+  font-size: 13px;
+}
+.gf-personal-row small {
+  display: block;
+  opacity: .65;
+  margin-top: 5px;
+}
+.gf-personal-income {
+  color: #52d6a2;
+  text-align: right;
+}
+.gf-personal-expense {
+  color: #ff778d;
+  text-align: right;
+}
+.gf-personal-row button {
+  display: block;
+  margin: 6px 0 0 auto;
+  border: 0;
+  background: transparent;
+  color: #ff778d;
+}
+`;
+
+document.head.appendChild(gfPersonalStyle);
+
+/* =====================================
+   GUNAFAST - LAPORAN LABA RUGI
+===================================== */
+
+function renderProfitLoss() {
+  const page = document.getElementById("laba-rugi");
+  if (!page) return;
+
+  const allSales = Array.isArray(sales) ? sales : [];
+
+  const allFinance = Array.isArray(gfFinanceEntries)
+    ? gfFinanceEntries : [];
+
+  // Total penjualan dari kasir
+  const revenue = allSales.reduce(
+    (sum, sale) => sum + Number(sale.total || 0), 0
+  );
+
+  // Modal barang yang benar-benar terjual
+  const costOfGoods = allSales.reduce(
+    (sum, sale) => sum + Number(sale.cost || 0), 0
+  );
+
+  // Laba kotor dari kasir
+  const grossProfit = allSales.reduce(
+    (sum, sale) => sum + Number(sale.profit || 0), 0
+  );
+
+  // Pemasukan tambahan, tidak termasuk modal tambahan
+  const otherIncome = allFinance
+    .filter(item =>
+      item.type === "income" &&
+      item.category !== "Modal tambahan"
+    )
+    .reduce(
+      (sum, item) => sum + Number(item.amount || 0), 0
+    );
+
+  // Pengeluaran usaha
+  const expenses = allFinance
+    .filter(item => item.type === "expense")
+    .reduce(
+      (sum, item) => sum + Number(item.amount || 0), 0
+    );
+
+  const netProfit = grossProfit + otherIncome - expenses;
+
+  const status = netProfit > 0
+    ? "Bisnis menghasilkan laba"
+    : netProfit < 0
+      ? "Bisnis mengalami kerugian"
+      : "Bisnis berada di titik impas";
+
+  page.innerHTML = `
+    <div class="gf-pl">
+
+      <h2>Laporan Laba Rugi</h2>
+      <p class="gf-pl-muted">
+        Ringkasan performa keuangan usaha
+      </p>
+
+      <div class="gf-pl-highlight">
+        <small>Hasil laba / rugi bersih</small>
+        <h1>${money(netProfit)}</h1>
+        <p>${status}</p>
+      </div>
+
+      <div class="gf-pl-card">
+        <h3>Pendapatan</h3>
+
+        <div class="gf-pl-row">
+          <span>Penjualan kasir</span>
+          <strong>${money(revenue)}</strong>
+        </div>
+
+        <div class="gf-pl-row">
+          <span>Pemasukan tambahan</span>
+          <strong>${money(otherIncome)}</strong>
+        </div>
+
+        <div class="gf-pl-row gf-pl-total">
+          <span>Total pendapatan</span>
+          <strong>${money(revenue + otherIncome)}</strong>
+        </div>
+      </div>
+
+      <div class="gf-pl-card">
+        <h3>Harga pokok penjualan</h3>
+
+        <div class="gf-pl-row">
+          <span>Modal barang terjual</span>
+          <strong>${money(costOfGoods)}</strong>
+        </div>
+
+        <div class="gf-pl-row gf-pl-total">
+          <span>Laba kotor</span>
+          <strong>${money(grossProfit)}</strong>
+        </div>
+      </div>
+
+      <div class="gf-pl-card">
+        <h3>Pengeluaran usaha</h3>
+
+        <div class="gf-pl-row">
+          <span>Total pengeluaran tercatat</span>
+          <strong>${money(expenses)}</strong>
+        </div>
+      </div>
+
+      <div class="gf-pl-card gf-pl-final">
+        <div class="gf-pl-row">
+          <span>Laba kotor</span>
+          <strong>${money(grossProfit)}</strong>
+        </div>
+
+        <div class="gf-pl-row">
+          <span>Pemasukan tambahan</span>
+          <strong>${money(otherIncome)}</strong>
+        </div>
+
+        <div class="gf-pl-row">
+          <span>Pengeluaran usaha</span>
+          <strong>-${money(expenses)}</strong>
+        </div>
+
+        <div class="gf-pl-row gf-pl-total">
+          <span>Laba / rugi bersih</span>
+          <strong>${money(netProfit)}</strong>
+        </div>
+      </div>
+
+      <p class="gf-pl-muted">
+        Diperbarui berdasarkan data transaksi dan catatan
+        keuangan usaha yang tersimpan.
+      </p>
+
+    </div>
+  `;
+}
+
+// Buat menu dan halaman laba rugi
+function setupProfitLoss() {
+  if (document.getElementById("laba-rugi")) return;
+
+  const nav = document.querySelector("nav");
+  const existingPage = document.querySelector(".page");
+
+  if (!nav || !existingPage) {
+    console.warn("GUNAFAST: navigasi tidak ditemukan.");
+    return;
+  }
+
+  const button = document.createElement("button");
+  button.type = "button";
+  button.className = nav.querySelector("button")?.className || "";
+  button.textContent = "Laba Rugi";
+  button.setAttribute(
+    "onclick",
+    "showPage('laba-rugi', this)"
+  );
+
+  nav.appendChild(button);
+
+  const section = document.createElement("section");
+  section.id = "laba-rugi";
+  section.className = "page";
+
+  existingPage.parentElement.appendChild(section);
+}
+
+// Hubungkan halaman dengan navigasi
+const gfShowPageBeforePL = showPage;
+
+showPage = function(pageId, button) {
+  gfShowPageBeforePL(pageId, button);
+
+  if (pageId === "laba-rugi") {
+    renderProfitLoss();
+  }
+};
+
+// Tampilan
+const gfPLStyle = document.createElement("style");
+
+gfPLStyle.textContent = `
+.gf-pl {
+  padding: 16px;
+  color: #f4f6ff;
+}
+.gf-pl-muted {
+  opacity: .65;
+  font-size: 12px;
+}
+.gf-pl-highlight {
+  padding: 20px;
+  margin: 18px 0;
+  border-radius: 15px;
+  background: #24204b;
+  border: 1px solid #7864df;
+}
+.gf-pl-highlight h1 {
+  font-size: 27px;
+  overflow-wrap: anywhere;
+}
+.gf-pl-highlight small,
+.gf-pl-highlight p {
+  opacity: .8;
+}
+.gf-pl-card {
+  padding: 16px;
+  margin-bottom: 13px;
+  border-radius: 14px;
+  background: #141a30;
+  border: 1px solid #303a5a;
+}
+.gf-pl-card h3 {
+  margin-top: 0;
+  font-size: 15px;
+}
+.gf-pl-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 0;
+  border-bottom: 1px solid #303a5a;
+  font-size: 13px;
+}
+.gf-pl-row:last-child {
+  border-bottom: 0;
+}
+.gf-pl-row strong {
+  text-align: right;
+  overflow-wrap: anywhere;
+}
+.gf-pl-total {
+  font-weight: bold;
+  color: #a995ff;
+}
+.gf-pl-final {
+  border-color: #7864df;
+}
+`;
+
+document.head.appendChild(gfPLStyle);
+setupProfitLoss();
+
+/* =====================================
+   GUNAFAST - BACKUP & RESTORE
+===================================== */
+
+function gfSetupBackup() {
+  if (document.getElementById("backup")) return;
+
+  const nav = document.querySelector("nav");
+  const existingPage = document.querySelector(".page");
+
+  if (!nav || !existingPage) {
+    console.warn("GUNAFAST: navigasi tidak ditemukan.");
+    return;
+  }
+
+  const button = document.createElement("button");
+  button.type = "button";
+  button.className = nav.querySelector("button")?.className || "";
+  button.textContent = "Backup";
+  button.setAttribute("onclick", "showPage('backup', this)");
+  nav.appendChild(button);
+
+  const page = document.createElement("section");
+  page.id = "backup";
+  page.className = "page";
+
+  existingPage.parentElement.appendChild(page);
+}
+
+function gfRenderBackup() {
+  const page = document.getElementById("backup");
+  if (!page) return;
+
+  page.innerHTML = `
+    <div class="gf-backup">
+
+      <h2>Backup & Restore</h2>
+      <p class="gf-backup-muted">
+        Amankan seluruh data bisnis GUNAFAST.
+      </p>
+
+      <div class="gf-backup-card">
+        <h3>Backup data</h3>
+        <p>
+          Simpan salinan data produk, stok, penjualan,
+          keuangan usaha, dan keuangan pribadi.
+        </p>
+
+        <button type="button"
+          class="gf-backup-primary"
+          onclick="gfExportBackup()">
+          Download Backup
+        </button>
+      </div>
+
+      <div class="gf-backup-card">
+        <h3>Restore data</h3>
+        <p>
+          Pulihkan data GUNAFAST dari file backup JSON.
+          Proses ini akan mengganti data GUNAFAST yang ada.
+        </p>
+
+        <input
+          type="file"
+          id="gfBackupFile"
+          accept=".json,application/json"
+        >
+
+        <button type="button"
+          class="gf-backup-secondary"
+          onclick="gfImportBackup()">
+          Pulihkan Backup
+        </button>
+      </div>
+
+      <div class="gf-backup-warning">
+        <strong>Perhatian</strong>
+        <p>
+          Simpan file backup di tempat aman.
+          Jangan membagikannya kepada orang lain karena
+          file dapat berisi catatan keuangan dan transaksi.
+        </p>
+      </div>
+
+    </div>
+  `;
+}
+
+function gfExportBackup() {
+  const data = {};
+
+  for (let i = 0; i < localStorage.length; i++) {
+    const key = localStorage.key(i);
+
+    if (key) {
+      data[key] = localStorage.getItem(key);
+    }
+  }
+
+  if (Object.keys(data).length === 0) {
+    alert("Tidak ditemukan data GUNAFAST untuk dicadangkan.");
+    return;
+  }
+
+  const backup = {
+    app: "GUNAFAST",
+    version: 1,
+    createdAt: new Date().toISOString(),
+    data
+  };
+
+  const blob = new Blob(
+    [JSON.stringify(backup, null, 2)],
+    { type: "application/json" }
+  );
+
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+
+  const date = new Date().toISOString().slice(0, 10);
+
+  link.href = url;
+  link.download = "GUNAFAST-Backup-" + date + ".json";
+
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+
+  alert("File backup berhasil dibuat. Simpan file tersebut dengan aman.");
+}
+
+function gfImportBackup() {
+  const input = document.getElementById("gfBackupFile");
+  const file = input?.files?.[0];
+
+  if (!file) {
+    alert("Pilih file backup terlebih dahulu.");
+    return;
+  }
+
+  const reader = new FileReader();
+
+  reader.onload = function() {
+    try {
+      const backup = JSON.parse(reader.result);
+
+      if (
+        backup.app !== "GUNAFAST" ||
+        backup.version !== 1 ||
+        !backup.data ||
+        typeof backup.data !== "object" ||
+        Array.isArray(backup.data)
+      ) {
+        throw new Error("Format backup tidak valid.");
+      }
+
+      const entries = Object.entries(backup.data);
+
+if (
+    entries.length === 0 ||
+    entries.some(([key, value]) =>
+        typeof value !== "string"
+    )
+) {
+    throw new Error("Isi backup tidak valid.");
+}
+
+
+      // Pastikan semua data berbentuk JSON yang valid
+      entries.forEach(([key, value]) => {
+        JSON.parse(value);
+      });
+
+      const confirmed = confirm(
+        "Restore akan mengganti data GUNAFAST saat ini. " +
+        "Pastikan kamu sudah membuat backup terbaru. Lanjutkan?"
+      );
+
+      if (!confirmed) return;
+
+      // Simpan data lama untuk pemulihan jika terjadi kegagalan
+      const oldData = {};
+
+      for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+
+        if (key) {
+    oldData[key] = localStorage.getItem(key);
+}
+      }
+
+      try {
+        Object.keys(oldData).forEach(key => {
+          localStorage.removeItem(key);
+        });
+
+        entries.forEach(([key, value]) => {
+          localStorage.setItem(key, value);
+        });
+
+      } catch (error) {
+        // Kembalikan data lama jika restore gagal
+        Object.keys(localStorage)
+          .filter(key => key.startsWith("gunafast_"))
+          .forEach(key => localStorage.removeItem(key));
+
+        Object.entries(oldData).forEach(([key, value]) => {
+          localStorage.setItem(key, value);
+        });
+
+        throw error;
+      }
+
+      alert("Restore berhasil. Halaman akan dimuat ulang.");
+      location.reload();
+
+    } catch (error) {
+      alert("Restore gagal: " + error.message);
+    }
+  };
+
+  reader.onerror = function() {
+    alert("File backup tidak dapat dibaca.");
+  };
+
+  reader.readAsText(file);
+}
+
+// Hubungkan halaman backup ke navigasi
+gfSetupBackup();
+
+const gfPreviousShowPageBackup = showPage;
+
+showPage = function(pageId, button) {
+  gfPreviousShowPageBackup(pageId, button);
+
+  if (pageId === "backup") {
+    gfRenderBackup();
+  }
+};
+
+// Tampilan backup
+const gfBackupStyle = document.createElement("style");
+
+gfBackupStyle.textContent = `
+.gf-backup {
+  padding: 16px;
+  color: #f4f6ff;
+}
+.gf-backup-muted {
+  opacity: .65;
+  font-size: 12px;
+}
+.gf-backup-card {
+  background: #141a30;
+  border: 1px solid #303a5a;
+  border-radius: 14px;
+  padding: 17px;
+  margin: 15px 0;
+}
+.gf-backup-card h3 {
+  margin-top: 0;
+}
+.gf-backup-card p {
+  font-size: 13px;
+  line-height: 1.6;
+  opacity: .75;
+}
+.gf-backup-card input {
+  box-sizing: border-box;
+  width: 100%;
+  margin: 12px 0;
+  padding: 10px;
+  border: 1px solid #384365;
+  border-radius: 9px;
+  background: #0c1124;
+  color: white;
+}
+.gf-backup-primary,
+.gf-backup-secondary {
+  width: 100%;
+  padding: 13px;
+  border: 0;
+  border-radius: 10px;
+  color: white;
+  font-weight: bold;
+}
+.gf-backup-primary {
+  background: #7864df;
+}
+.gf-backup-secondary {
+  background: #286b9c;
+}
+.gf-backup-warning {
+  padding: 14px;
+  border: 1px solid #b58b43;
+  border-radius: 12px;
+  background: #342b1b;
+  color: #ffe3a5;
+  font-size: 12px;
+  line-height: 1.6;
+}
+`;
+
+document.head.appendChild(gfBackupStyle);
+/* GUNAFAST FINAL DASHBOARD UPDATE */
+
+function gfUpdateDashboard() {
+  const totalSales = sales.reduce(
+    (sum, item) => sum + Number(item.total || 0), 0
+  );
+
+  const totalProfit = sales.reduce(
+    (sum, item) => sum + Number(item.profit || 0), 0
+  );
+
+  const extraIncome = gfFinanceEntries
+    .filter(item => item.type === "income")
+    .reduce((sum, item) => sum + Number(item.amount || 0), 0);
+
+  const expenses = gfFinanceEntries
+    .filter(item => item.type === "expense")
+    .reduce((sum, item) => sum + Number(item.amount || 0), 0);
+
+  const capital = products.reduce(
+    (sum, item) =>
+      sum + Number(item.buy || 0) * Number(item.stock || 0), 0
+  );
+
+  const profit = totalProfit + extraIncome - expenses;
+
+  const cards = document.querySelectorAll("#dashboard .card h2");
+
+  if (cards.length >= 4) {
+    cards[0].textContent = money(totalSales);
+    cards[1].textContent = money(profit);
+    cards[2].textContent = money(capital);
+    cards[3].textContent = money(expenses);
+  }
+
+  const activity = document.querySelector(
+    "#dashboard .panel"
+  );
+
+  if (activity) {
+    if (sales.length) {
+      activity.innerHTML = [...sales]
+        .reverse()
+        .slice(0, 3)
+        .map(item => `
+          <div style="padding:10px 0;border-bottom:1px solid #303b5d">
+            <strong>${safeText(item.invoice)}</strong>
+            <p>${new Date(item.date).toLocaleString("id-ID")}</p>
+            <strong class="green">${money(item.total)}</strong>
+          </div>
+        `).join("");
+    } else {
+      activity.innerHTML =
+        "<strong>Belum ada transaksi</strong><p>Transaksi terbaru akan muncul di sini.</p>";
+    }
+  }
+}
+
+/* AUTO UPDATE SETELAH DATA BERUBAH */
+
+const oldSaveProduct = saveProductData;
+saveProductData = function() {
+  oldSaveProduct();
+  gfUpdateDashboard();
+};
+
+const oldSaveSales = saveSales;
+saveSales = function() {
+  oldSaveSales();
+  gfUpdateDashboard();
+};
+
+const oldSaveFinance = gfSaveFinance;
+gfSaveFinance = function() {
+  oldSaveFinance();
+  gfUpdateDashboard();
+};
+
+/* TANGGAL OTOMATIS */
+
+const dateElement = document.querySelector(
+  "#dashboard .welcome > p:first-child"
+);
+
+if (dateElement) {
+  dateElement.textContent = new Date().toLocaleDateString(
+    "id-ID",
+    {
+      weekday: "long",
+      day: "numeric",
+      month: "long",
+      year: "numeric"
+    }
+  ).toUpperCase();
+}
+
+gfUpdateDashboard();
+/* ==================================
+   GUNAFAST NATURE THEME FINAL
+================================== */
+
+const gfNatureStyle = document.createElement("style");
+
+gfNatureStyle.textContent = `
+body {
+  background: #edf7f5 !important;
+  color: #183b36 !important;
+}
+
+.app {
+  background: transparent !important;
+}
+
+header {
+  color: #174b45 !important;
+}
+
+.logo {
+  background: linear-gradient(90deg,#2696c7,#269b70) !important;
+  -webkit-background-clip: text !important;
+}
+
+.version,
+.welcome p {
+  color: #648b83 !important;
+}
+
+.welcome h1 span {
+  color: #279b79 !important;
+}
+
+.card,
+.panel,
+.empty,
+.product-item,
+.report-panel,
+.gf-pl-card,
+.gf-backup-card {
+  background: #ffffff !important;
+  color: #214a42 !important;
+  border: 1px solid #d2e9e2 !important;
+  box-shadow: 0 3px 12px rgba(31,110,91,.06);
+}
+
+.card p,
+.panel p,
+.product-info,
+.report-muted,
+.gf-backup-muted {
+  color: #64847c !important;
+}
+
+.section-title {
+  color: #267e70 !important;
+}
+
+nav {
+  background: rgba(255,255,255,.97) !important;
+  border-top: 1px solid #cce5dc !important;
+  box-shadow: 0 -4px 15px rgba(30,100,80,.08);
+}
+
+nav button {
+  color: #7b9990 !important;
+  font-size: 10px !important;
+}
+
+nav button span {
+  font-size: 21px !important;
+}
+
+nav button.active {
+  color: #219b78 !important;
+  font-weight: bold;
+}
+
+button {
+  cursor: pointer;
+}
+
+.green {
+  color: #239b70 !important;
+}
+
+.blue {
+  color: #269bc9 !important;
+}
+
+.purple {
+  color: #269b78 !important;
+}
+
+.report-panel,
+.gf-pl-highlight,
+.gf-backup-warning {
+  border-radius: 16px;
+}
+
+.gf-pl-highlight {
+  background: linear-gradient(135deg,#d9f1f8,#dff5e9) !important;
+  border: 1px solid #b9e4d6 !important;
+  color: #205c50 !important;
+}
+
+.gf-pl-total {
+  color: #239b78 !important;
+}
+
+.gf-backup-warning {
+  background: #eff8e9 !important;
+  color: #527344 !important;
+  border: 1px solid #cde4b8 !important;
+}
+
+input, select, textarea {
+  border-color: #c7e2d9 !important;
+}
+`;
+
+document.head.appendChild(gfNatureStyle);
+
+/* IKON UNTUK SEMUA MENU */
+
+const gfNavItems = [
+  ["🏠", "Home"],
+  ["📦", "Produk"],
+  ["🛒", "Kasir"],
+  ["🌱", "Stok"],
+  ["💰", "Keuangan"],
+  ["📊", "Laporan"],
+  ["📈", "Laba Rugi"],
+  ["🗂️", "Backup"]
+];
+
+const gfNavButtons = document.querySelectorAll("nav button");
+
+gfNavButtons.forEach((button, index) => {
+  const item = gfNavItems[index];
+
+  if (!item) return;
+
+  const icon = document.createElement("span");
+  icon.textContent = item[0];
+
+  button.replaceChildren(
+    icon,
+    document.createTextNode(item[1])
+  );
+});
+
+/* WARNA STATUS */
+
+document.querySelector('meta[name="theme-color"]')
+  ?.setAttribute("content", "#edf7f5");
+
+console.log("GUNAFAST Nature Theme aktif.");
+</script>
+
+</body>
+</html>
+  
