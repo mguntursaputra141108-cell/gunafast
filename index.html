@@ -3967,6 +3967,39 @@ nav button.active {
 `;
 
 document.head.appendChild(gfLightBlue);
+/* FORCE GUNAFAST LIGHT BLUE */
+
+function gfForceLightBlue() {
+  document.querySelectorAll("select, input, textarea").forEach(el => {
+    el.style.setProperty("background", "#dff3fb", "important");
+    el.style.setProperty("background-color", "#dff3fb", "important");
+    el.style.setProperty("color", "#244653", "important");
+    el.style.setProperty("border-color", "#acd9e9", "important");
+  });
+
+  document.querySelectorAll("button").forEach(el => {
+    if (
+      el.closest("nav") ||
+      el.closest(".gf-profile-box") ||
+      el.classList.contains("profile")
+    ) return;
+
+    el.style.setProperty(
+      "background",
+      "linear-gradient(135deg,#dff3fb,#a9dcef)",
+      "important"
+    );
+    el.style.setProperty("color", "#28566a", "important");
+    el.style.setProperty("border-color", "#acd9e9", "important");
+  });
+}
+
+gfForceLightBlue();
+
+new MutationObserver(gfForceLightBlue).observe(
+  document.body,
+  { childList: true, subtree: true }
+);
 </script>
 
 </body>
