@@ -3532,6 +3532,389 @@ document.querySelector('meta[name="theme-color"]')
   ?.setAttribute("content", "#edf7f5");
 
 console.log("GUNAFAST Nature Theme aktif.");
+
+/* ==================================
+   GUNAFAST GOLD FUTURISTIC UPDATE
+================================== */
+
+const gfGoldStyle = document.createElement("style");
+gfGoldStyle.textContent = `
+:root {
+  --gf-gold: #c99b35;
+  --gf-gold-light: #f3d88c;
+  --gf-gold-dark: #8d6820;
+}
+
+.profile {
+  cursor: pointer;
+  color: var(--gf-gold-light) !important;
+  background: linear-gradient(145deg,#26304e,#10172c) !important;
+  border: 1px solid var(--gf-gold) !important;
+  box-shadow: 0 0 14px #c99b3533;
+  width: 52px !important;
+  height: 52px !important;
+}
+
+.action {
+  background: linear-gradient(145deg,#202b48,#111a31) !important;
+  border: 1px solid #c99b3570 !important;
+  color: #f7e8bf !important;
+  box-shadow: 0 5px 18px #17213a22;
+}
+
+.action:active {
+  background: linear-gradient(145deg,#59451e,#26304e) !important;
+}
+
+nav button.active {
+  color: var(--gf-gold-dark) !important;
+}
+
+nav button span {
+  color: var(--gf-gold) !important;
+}
+
+.gf-profile-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+  background: #08101bd9;
+  backdrop-filter: blur(8px);
+}
+
+.gf-profile-modal.open {
+  display: flex;
+}
+
+.gf-profile-box {
+  width: 100%;
+  max-width: 440px;
+  max-height: 85vh;
+  overflow-y: auto;
+  padding: 22px;
+  border-radius: 22px;
+  background: #f7f9f8;
+  color: #203c38;
+  border: 1px solid var(--gf-gold);
+  box-shadow: 0 0 30px #c99b3533;
+}
+
+.gf-profile-box h2 {
+  color: #98701e;
+  margin-bottom: 7px;
+}
+
+.gf-profile-box .gf-muted {
+  color: #71847e;
+  font-size: 12px;
+  margin-bottom: 18px;
+}
+
+.gf-profile-box label {
+  display: block;
+  font-size: 13px;
+  font-weight: bold;
+  margin: 13px 0 6px;
+}
+
+.gf-profile-box input,
+.gf-profile-box select {
+  width: 100%;
+  padding: 13px;
+  border: 1px solid #dfc98d;
+  border-radius: 11px;
+  background: white;
+  color: #263e38;
+  font-size: 14px;
+}
+
+.gf-profile-box button {
+  width: 100%;
+  padding: 13px;
+  border: 0;
+  border-radius: 11px;
+  margin-top: 12px;
+  background: linear-gradient(100deg,#b78a2d,#e2c16c);
+  color: #17251f;
+  font-weight: bold;
+}
+
+.gf-profile-box .gf-close {
+  background: #e8eeeb;
+  color: #40564f;
+}
+
+.gf-profile-box .gf-info {
+  padding: 12px;
+  margin-top: 12px;
+  border-radius: 10px;
+  background: #edf4ee;
+  color: #536b5d;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.gf-futuristic-icon {
+  width: 25px;
+  height: 25px;
+  display: block;
+  margin: 0 auto 5px;
+  color: var(--gf-gold);
+}
+
+.gf-gold-dark {
+  background: #101827 !important;
+  color: #f3e6c5 !important;
+}
+
+.gf-gold-dark .gf-profile-box {
+  background: #18243a;
+  color: #f3e6c5;
+}
+
+.gf-gold-dark .gf-profile-box input,
+.gf-gold-dark .gf-profile-box select {
+  background: #101827;
+  color: white;
+}
+`;
+document.head.appendChild(gfGoldStyle);
+
+/* IKON FUTURISTIK SVG */
+
+const gfIcons = {
+  home: '<path d="M3 11 12 3l9 8v9a1 1 0 0 1-1 1h-5v-7H10v7H4a1 1 0 0 1-1-1z"/>',
+  product: '<path d="m12 3 9 5-9 5-9-5 9-5zM3 8v9l9 5 9-5V8M12 13v9"/>',
+  cashier: '<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 8h10M7 12h2m3 0h2m3 0h1M7 16h10"/>',
+  stock: '<path d="M4 19V5m0 14h17M8 15l4-5 3 2 5-7"/><circle cx="20" cy="5" r="1"/>',
+  money: '<circle cx="12" cy="12" r="9"/><path d="M15 8h-5a2 2 0 0 0 0 4h4a2 2 0 0 1 0 4H8m4-10v12"/>',
+  report: '<path d="M4 20V10h4v10zm6 0V4h4v16zm6 0v-7h4v7z"/>',
+  profit: '<path d="M3 17 9 11l4 4 8-9"/><path d="M15 6h6v6"/>',
+  backup: '<path d="M12 3v12m-5-5 5 5 5-5"/><path d="M4 17v3h16v-3"/>',
+  user: '<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>'
+};
+
+function gfSvg(name) {
+  return `<svg class="gf-futuristic-icon" viewBox="0 0 24 24"
+    fill="none" stroke="currentColor" stroke-width="1.7"
+    stroke-linecap="round" stroke-linejoin="round"
+    aria-hidden="true">${gfIcons[name]}</svg>`;
+}
+
+/* IKON MENU BAWAH */
+
+const gfIconNames = [
+  "home", "product", "cashier", "stock",
+  "money", "report", "profit", "backup"
+];
+
+document.querySelectorAll("nav button").forEach((button, index) => {
+  const label = [
+    "Home", "Produk", "Kasir", "Stok",
+    "Keuangan", "Laporan", "Laba Rugi", "Backup"
+  ][index];
+
+  if (!label) return;
+
+  button.innerHTML = gfSvg(gfIconNames[index]) + label;
+});
+
+/* IKON AKTIVITAS CEPAT */
+
+document.querySelectorAll(".action").forEach(button => {
+  const label = button.textContent.replace(/\s+/g, " ").trim();
+  let icon = "product";
+
+  if (label.includes("Kasir")) icon = "cashier";
+  if (label.includes("stok")) icon = "stock";
+  if (label.includes("Keuangan")) icon = "money";
+
+  button.innerHTML = gfSvg(icon) + `<br>${label}`;
+});
+
+/* PROFIL PENGGUNA */
+
+const gfProfileKey = "gunafast_profile_settings";
+
+let gfProfile = {};
+try {
+  gfProfile = JSON.parse(localStorage.getItem(gfProfileKey)) || {};
+} catch (e) {
+  gfProfile = {};
+}
+
+const gfProfileModal = document.createElement("div");
+gfProfileModal.className = "gf-profile-modal";
+gfProfileModal.innerHTML = `
+  <div class="gf-profile-box">
+    <h2>◈ Profil GUNAFAST</h2>
+    <p class="gf-muted">Pengaturan akun dan preferensi aplikasi</p>
+
+    <label>Nama akun</label>
+    <input id="gfAccountName" placeholder="Masukkan nama akun">
+
+    <label>Username</label>
+    <input id="gfUsername" placeholder="@username">
+
+    <label>Email Gmail</label>
+    <input id="gfGmail" type="email" placeholder="Alamat Gmail">
+
+    <button type="button" id="gfGoogleButton">
+      Hubungkan akun Google
+    </button>
+
+    <div class="gf-info">
+      Login Gmail belum aktif. Integrasi Google OAuth perlu
+      dikonfigurasi terlebih dahulu.
+    </div>
+
+    <label>Tema aplikasi</label>
+    <select id="gfTheme">
+      <option value="light">Gold Light</option>
+      <option value="dark">Gold Dark</option>
+    </select>
+
+    <label>Bahasa aplikasi</label>
+    <select id="gfLanguage">
+      <option value="id">Bahasa Indonesia</option>
+      <option value="en">English</option>
+    </select>
+
+    <label>Password aplikasi</label>
+    <button type="button" id="gfPasswordInfo">
+      Pengaturan keamanan password
+    </button>
+
+    <div class="gf-info">
+      Fitur password akun memerlukan sistem autentikasi aman.
+      Jangan gunakan password Gmail di aplikasi ini.
+    </div>
+
+    <label>Pusat bantuan</label>
+    <button type="button" id="gfHelp">
+      Buka informasi bantuan
+    </button>
+
+    <div class="gf-info" id="gfHelpText" hidden>
+      GUNAFAST — Bantuan pengguna<br>
+      Produk: pengelolaan barang dan harga.<br>
+      Kasir: transaksi penjualan.<br>
+      Stok: pencatatan stok masuk dan keluar.<br>
+      Laporan: ringkasan transaksi dan keuangan.<br>
+      Backup: pencadangan data aplikasi.
+    </div>
+
+    <button type="button" id="gfSaveProfile">
+      Simpan pengaturan
+    </button>
+
+    <button type="button" class="gf-close" id="gfCloseProfile">
+      Tutup
+    </button>
+  </div>
+`;
+
+document.body.appendChild(gfProfileModal);
+
+const gfProfileButton = document.querySelector(".profile");
+
+if (gfProfileButton) {
+  gfProfileButton.innerHTML = gfSvg("user");
+  gfProfileButton.setAttribute("role", "button");
+  gfProfileButton.setAttribute("aria-label", "Buka profil");
+  gfProfileButton.addEventListener("click", () => {
+    document.getElementById("gfAccountName").value =
+      gfProfile.name || "";
+
+    document.getElementById("gfUsername").value =
+      gfProfile.username || "";
+
+    document.getElementById("gfGmail").value =
+      gfProfile.email || "";
+
+    document.getElementById("gfTheme").value =
+      gfProfile.theme || "light";
+
+    document.getElementById("gfLanguage").value =
+      gfProfile.language || "id";
+
+    gfProfileModal.classList.add("open");
+  });
+}
+
+document.getElementById("gfCloseProfile").onclick = () => {
+  gfProfileModal.classList.remove("open");
+};
+
+gfProfileModal.addEventListener("click", event => {
+  if (event.target === gfProfileModal) {
+    gfProfileModal.classList.remove("open");
+  }
+});
+
+document.getElementById("gfSaveProfile").onclick = () => {
+  gfProfile.name =
+    document.getElementById("gfAccountName").value.trim();
+
+  gfProfile.username =
+    document.getElementById("gfUsername").value.trim();
+
+  gfProfile.email =
+    document.getElementById("gfGmail").value.trim();
+
+  gfProfile.theme =
+    document.getElementById("gfTheme").value;
+
+  gfProfile.language =
+    document.getElementById("gfLanguage").value;
+
+  localStorage.setItem(
+    gfProfileKey,
+    JSON.stringify(gfProfile)
+  );
+
+  gfApplyTheme();
+
+  const welcome = document.querySelector("#dashboard .welcome h1");
+  if (welcome && gfProfile.name) {
+    welcome.innerHTML =
+      `Welcome to <span>${safeText(gfProfile.name)}</span>`;
+  }
+
+  alert("Pengaturan profil berhasil disimpan.");
+  gfProfileModal.classList.remove("open");
+};
+
+function gfApplyTheme() {
+  document.body.classList.toggle(
+    "gf-gold-dark",
+    gfProfile.theme === "dark"
+  );
+}
+
+gfApplyTheme();
+
+/* TOMBOL INFORMASI */
+
+document.getElementById("gfGoogleButton").onclick = () => {
+  alert("Login Google memerlukan konfigurasi Google OAuth terlebih dahulu.");
+};
+
+document.getElementById("gfPasswordInfo").onclick = () => {
+  alert("Pengaturan password akun belum aktif. Jangan masukkan password Gmail di sini.");
+};
+
+document.getElementById("gfHelp").onclick = () => {
+  const help = document.getElementById("gfHelpText");
+  help.hidden = !help.hidden;
+};
+
+console.log("GUNAFAST Gold Futuristic aktif.");
+
 </script>
 
 </body>
