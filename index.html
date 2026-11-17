@@ -3915,6 +3915,58 @@ document.getElementById("gfHelp").onclick = () => {
 
 console.log("GUNAFAST Gold Futuristic aktif.");
 
+  /* GUNAFAST LIGHT BLUE THEME */
+
+const gfLightBlue = document.createElement("style");
+
+gfLightBlue.textContent = `
+:root {
+  --gf-blue: #b9e5f5;
+  --gf-blue-light: #e5f5fb;
+  --gf-blue-dark: #347f9e;
+}
+
+/* Dropdown dan kolom input */
+input:not([type="checkbox"]):not([type="radio"]),
+select,
+textarea {
+  background: #e5f5fb !important;
+  color: #244653 !important;
+  border: 1px solid #acd9e9 !important;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #789ba9 !important;
+}
+
+/* Tombol aktivitas dan tombol umum */
+.action,
+button:not(.gf-profile-box button) {
+  background: linear-gradient(
+    135deg,
+    #d9f1fa,
+    #a9dcef
+  ) !important;
+  color: #28566a !important;
+  border: 1px solid #acd9e9 !important;
+}
+
+/* Panel dan kartu */
+.card,
+.panel,
+section {
+  border-color: #c7e5ec;
+}
+
+/* Aksen emas tetap ada */
+.gf-futuristic-icon,
+nav button.active {
+  color: #c99b35 !important;
+}
+`;
+
+document.head.appendChild(gfLightBlue);
 </script>
 
 </body>
