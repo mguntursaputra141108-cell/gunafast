@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#090d1b">
+<meta name="theme-color" content="#b9e5ef">
 <title>GUNAFAST</title>
 
 <style>
@@ -384,8 +384,10 @@ nav button.active {
 </style>
   <link rel="manifest" href="/gunafast/manifest.json">
 <meta name="theme-color" content="#b9e5ef">
-<link rel="manifest" href="/gunafast/manifest.json">
-<meta name="theme-color" content="#b9e5ef">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="apple-touch-icon" href="/gunafast/icons/icon-192.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/gunafast/icons/icon-192.png">
 </head>
 
 <body>
@@ -1617,7 +1619,18 @@ function printReceipt(invoice) {
     </head>
     <body>
       ${receipt.innerHTML}
-    </body>
+    
+<script>
+// Daftarkan service worker agar GUNAFAST dapat dipasang dan dibuka saat offline.
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("/gunafast/sw.js", { scope: "/gunafast/" })
+      .catch(error => console.warn("GUNAFAST: service worker gagal didaftarkan", error));
+  });
+}
+</script>
+
+</body>
     </html>
   `);
 
